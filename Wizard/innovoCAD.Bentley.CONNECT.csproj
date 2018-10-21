@@ -140,13 +140,8 @@
     <None Include="Key.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Registry\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\CustomDictionary.xml">
-      <Link>CustomDictionary.xml</Link>
-    </Content>
     <EmbeddedResource Include="EmbeddedResources\native.{FAD22EAD-82A1-4DB6-9718-B91226D9A42A}.h" />
     <EmbeddedResource Include="EmbeddedResources\MicroStationUtilities.{F7AD6FF5-34E0-4FBE-B5CF}.cpp" />
     <EmbeddedResource Include="EmbeddedResources\MicroStationUtilities.{F7AD6FF5-34E0-4FBE-ORD}.cpp" />

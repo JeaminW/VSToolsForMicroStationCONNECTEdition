@@ -1,0 +1,69 @@
+#--------------------------------------------------------------------------------------+
+#   $safeitemname$.mke
+#
+#--------------------------------------------------------------------------------------*/
+
+PolicyFile = MicroStationPolicy.mki
+DEFAULT_TARGET_PROCESSOR_ARCHITECTURE=x64
+MDLMKI = $(MSMDE)mki/
+mdlLibs = $(MSMDE)library/
+dirToSearch = $(MDLMKI)
+genSrc = $(o)
+%include $(MDLMKI)mdl.mki
+%include $(MDLMKI)cincapnd.mki
+
+appName     = $safeprojectname$
+sAppName    = $safeprojectname$
+
+outputDir   = $(mdlApps)
+
+privateInc  = $(baseDir)
+langSpec    = $(baseDir)transkit/
+
+
+appRscs = $(rscObjects)$(appName).rsc \
+          $(rscObjects)$(sAppName)cmd.rsc
+    
+
+#----------------------------------------------------------------------
+# Create needed output directories in case they don't exist
+#----------------------------------------------------------------------
+always:
+    !~@mkdir $(o)
+    !~@mkdir $(rscObjects)
+    !~@mkdir $(reqdObjs)
+
+
+#-----------------------------------------------------------------------
+#	Define constants specific to this example
+#-----------------------------------------------------------------------
+
+#-----------------------------------------------------------------------
+#	Generate non-language resource files
+#-----------------------------------------------------------------------
+$(genSrc)$(sAppName)cmd.h       : $(baseDir)$(sAppName)cmd.r
+
+$(rscObjects)$(sAppName)cmd.rsc : $(baseDir)$(sAppName)cmd.r
+
+$(rscObjects)$(appName).rsc     :$(baseDir)$(appName).r
+
+#-----------------------------------------------------------------------
+#	Compile and link MDL DLL Application
+#-----------------------------------------------------------------------
+
+#-----------------------------------------------------------------------
+#	Merge Objects into one file
+#-----------------------------------------------------------------------
+$(reqdObjs)$(appName).mi        : $(appRscs)
+    $(msg)
+    >$(o)make.opt
+    -o$@
+    $(appRscs)
+    <
+    $(RLibCmd) @$(o)make.opt
+    ~time
+
+#----------------------------------------------------------------------
+# complete construction of the .ma
+#----------------------------------------------------------------------
+%include $(baseDir)$(appName)rsc.mki

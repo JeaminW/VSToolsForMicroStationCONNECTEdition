@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>MicroStation Wpf Application</Name>
+    <Description>Windows Presentation Foundation client application with MicroStation CONNECT Edition.</Description>
+    <Icon Package="{b3bae735-386c-4030-8329-ef48eeda4036}" ID="4602" />
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>45c7b646-5ec1-4bc8-9c1c-2499c4836502</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>MSCEWpfApplication</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <PromptForSaveOnCreation>false</PromptForSaveOnCreation>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>false</CreateInPlace>
+    <AppIdFilter>blend</AppIdFilter>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.resx">Resources.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Settings.settings">Settings.settings</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Settings.Designer.cs">Settings.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="false" SubType="Code" OpenOrder="20">MainWindow.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" OpenOrder="10">MainWindow.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true">App.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" SubType="Code">App.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true">App.config</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

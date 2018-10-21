@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+
+  <!--The commands.xml contains 3 main sections. <RootKeyinTable> defines the root of the 
+        command table tree. <SubKeyinTables> defines all of the subtrees that appear in the
+        tree. <KeyinHandlers> provides a mapping from key-in string to the method that handles
+        the key-in.-->
+
+  <!--Define the root. The entry for the root is very similar to an entry in the
+        table of subentries. The diference is that the entry for the root is labelled
+        RootKeyinTable, but an entry for a subtable is labelled as KeyinTable.-->
+  <RootKeyinTable ID="root">
+    <Keyword SubtableRef="$safeprojectname$"
+            CommandClass="MacroCommand" CommandWord="$safeprojectname$" >
+      <Options Required="true"/>
+    </Keyword>
+  </RootKeyinTable>
+
+
+  <!--Define subtables-->
+  <SubKeyinTables>
+    <KeyinTable ID="$safeprojectname$">
+      <Keyword CommandWord="Open"> </Keyword>
+    </KeyinTable>
+
+  </SubKeyinTables>
+
+  <!--Define a mapping from key-in to the method that handles the key-in.-->
+  <KeyinHandlers>
+    <KeyinHandler Keyin="$safeprojectname$ OPEN"
+        Function="$safeprojectname$.KeyinCommands.$safeprojectname$Command"/>
+  </KeyinHandlers>
+
+
+</KeyinTree>
+

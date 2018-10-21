@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Placement Tool Settings (Wpf)</Name>
+    <Description>A project item that inherits from the DgnPrimitiveTool class to create and place elements with a custom Wpf UserControl Form Tool Settings.</Description>
+    <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <TemplateID>f393c580-65a1-4179-bd5f-ee7535a7e6ac</TemplateID>
+    <SortOrder>1000</SortOrder>
+    <DefaultName>PlacementTool.vb</DefaultName>
+    <ProjectType>VisualBasic</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System.Drawing</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.Windows.Forms</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.Xaml</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>PresentationCore</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>PresentationFramework</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>WindowsBase</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>WindowsFormsIntegration</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>Bentley.UI</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>Bentley.UI.Vendor.WPF</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>Bentley.RibbonView</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>Bentley.MicroStation.Ribbon</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.vb">PrimitiveToolWpf.vb</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.vb\$fileinputname$.xaml" DependentUpon="$fileinputname$.vb">UserControl.xaml</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.xaml.vb">UserControl.xaml.vb</ProjectItem>
+    <CustomParameters>
+      <CustomParameter Name="$item$" Value="MicroStation Placement Tool Settings WPF"/>
+      <CustomParameter Name="$language$" Value="VisualBasic"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

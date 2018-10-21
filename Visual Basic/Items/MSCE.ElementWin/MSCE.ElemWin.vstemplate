@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Selection Tool Windows Form</Name>
+    <Description>A project item that inherits from a DgnElementSetTool class that modifies an element with a custom Windows Form Tool Settings.</Description>
+    <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <TemplateID>499ff5c5-41ae-4d47-ae2e-609afaad4f0c</TemplateID>
+    <SortOrder>1000</SortOrder>
+    <DefaultName>SelectionTool.vb</DefaultName>
+    <ProjectType>VisualBasic</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.Drawing</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.Windows.Forms</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.vb">ElementToolWin.vb</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.vb\$fileinputname$Form.vb" DependentUpon="$fileinputname$.vb">Form.vb</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$Form.Designer.vb">Form.Designer.vb</ProjectItem>
+    <CustomParameters>
+      <CustomParameter Name="$item$" Value="MicroStation Selection Tool Settings"/>
+      <CustomParameter Name="$language$" Value="VisualBasic"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

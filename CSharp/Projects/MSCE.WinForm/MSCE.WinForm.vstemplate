@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>MicroStation Windows Form Application</Name>
+    <Description>A project for creating an application with a Windows Forms user interface with MicroStation CONNECT Edition.</Description>
+    <Icon>4554.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>c91b379f-a14f-4550-aab2-b7e481301eed</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>MSCEWindowsFormApplication</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.resx">Resources.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Settings.settings">Settings.settings</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Settings.Designer.cs">Settings.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">Form1.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true">Form1.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true">Program.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true">App.config</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

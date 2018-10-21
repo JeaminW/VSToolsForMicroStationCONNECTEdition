@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Keywords>
+        <Keyword>
+        </Keyword>
+      </Keywords>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Get Element Properties</Title>
+      <Author>innovoCAD</Author>
+      <Description>Get element symbology and properties.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEGetElementProp</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+        <Import>
+          <Namespace>BG = Bentley.GeometryNET</Namespace>
+        </Import>
+      </Imports>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+        <Reference>
+          <Assembly>Bentley.GeometryNET.Structs</Assembly>
+        </Reference>
+      </References>
+      <Declarations>
+      </Declarations>
+      <Code Language="csharp" Kind="method body" Delimiter="$"><![CDATA[using (BDPN.ElementPropertiesGetter elementPropertyGetter = new BDPN.ElementPropertiesGetter(element))
+{
+    //TODO: Modify code for your needs.
+    BDPN.LevelId elementLevelId = elementPropertyGetter.Level;
+    int elementColor = (int)elementPropertyGetter.Color;
+    BG.DVector3d elementLineThickness = elementPropertyGetter.Thickness;
+    BDPN.LineStyleParameters elementLineStyle = elementPropertyGetter.LineStyle;
+    int elementLineWeight = (int)elementPropertyGetter.Weight;
+
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

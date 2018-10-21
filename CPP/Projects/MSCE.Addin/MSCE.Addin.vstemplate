@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>MicroStation Native</Name>
+    <Description>MicroStation CONNECT Edition Native without Key-ins.</Description>
+    <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <ProjectType>VC</ProjectType>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>ab333243-b5a4-4b4f-9719-63839c843cb7</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>MSCENative</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.vcxproj.filters">ProjectTemplate.vcxproj.filters</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" TargetFileName="$safeprojectname$.cpp">native.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.h">native.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Declare_ustnTaskId_Import.h">Declare_ustnTaskId_Import.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="std_collection_typedefs.h">std_collection_typedefs.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="tstring_typedef.h">tstring_typedef.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.mke">native.mke</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.r">native.r</ProjectItem>
+      <ProjectItem ReplaceParameters="true">MicroStationUtilities.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true">MicroStationUtilities.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true">ModulVer.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true">ModulVer.h</ProjectItem>
+    </Project>
+    <CustomParameters>
+      <CustomParameter Name="$language$" Value="CPP"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Key-In Command Table</Name>
+    <Description>A project item to create a Commands.xml file and a KeyinCommands.cs file mapped to the command.xml. One command table is allowed per project.</Description>
+    <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <TemplateID>d5f17fc9-e77d-4127-a27f-3ad27f754b07</TemplateID>
+    <SortOrder>1000</SortOrder>
+    <DefaultName>KeyinCommands.cs</DefaultName>
+    <ProjectType>VisualBasic</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true" TargetFileName="KeyinCommands.vb">KeyinCommands.vb</ProjectItem>
+    <ProjectItem ReplaceParameters="true"
+                 TargetFileName="Commands.xml"
+                 ItemType="EmbeddedResource"
+                 SubType="Designer">Commands.xml</ProjectItem>    
+    <CustomParameters>
+      <CustomParameter Name="$item$" Value="MicroStation Key-In Command Table"/>
+      <CustomParameter Name="$language$" Value="VisualBasic"/>      
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

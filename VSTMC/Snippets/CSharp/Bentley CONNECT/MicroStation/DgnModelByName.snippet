@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Keywords>
+        <Keyword>
+        </Keyword>
+      </Keywords>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Get Dgn Model By Name</Title>
+      <Author>innovoCAD</Author>
+      <Description>Get dgn model by name in dgn file.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEGetDgnModel</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+      </References>
+      <Declarations>
+      </Declarations>
+      <Code Language="csharp" Kind="method body" Delimiter="$"><![CDATA[
+//Get dgn model by name in dgn file.
+BDPN.StatusInt dgnModelStatus;
+BDPN.DgnModel dgnModel = activeDgnFile.LoadRootModelById(out dgnModelStatus, activeDgnFile.FindModelIdByName("default"));]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

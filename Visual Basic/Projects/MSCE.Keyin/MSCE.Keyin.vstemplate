@@ -1,0 +1,39 @@
+﻿<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>MicroStation Add-in Command</Name>
+    <Description>MicroStation CONNECT Edition Add-in Command with key-in command table.</Description>
+    <Icon>4509.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <ProjectType>VisualBasic</ProjectType>
+    <TemplateID>54bd7065-2573-418d-842e-a302ce7b7f54</TemplateID>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>MSCEApp</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.vbproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true"  OpenInEditor="true" OpenOrder="10" TargetFileName="Program.vb">Program.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\AssemblyInfo.vb">AssemblyInfo.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\Application.myapp">MyApplication.myapp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\Application.Designer.vb">MyApplication.Designer.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\Resources.resx">Resources.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\Resources.Designer.vb">Resources.Designer.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\Settings.settings">Settings.settings</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\Settings.Designer.vb">Settings.Designer.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="KeyinCommands.vb">KeyinCommands.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Commands.xml">Commands.xml</ProjectItem>
+      <ProjectItem ReplaceParameters="true">App.config</ProjectItem>
+		</Project>
+    <CustomParameters>
+      <CustomParameter Name="$language$" Value="VisualBasic"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

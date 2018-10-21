@@ -1,0 +1,18 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>CONNECT.ScanCriteriaExtension.csitem.cs</DefaultName>
+    <Name>CONNECT.ScanCriteriaExtension.csitem</Name>
+    <Description>Scan Criteria Extension</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>Bentley.DgnPlatformNET</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">ScanCriteriaExtensions.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

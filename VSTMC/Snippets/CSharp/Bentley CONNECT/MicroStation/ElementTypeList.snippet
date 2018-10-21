@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Keywords>
+        <Keyword>
+        </Keyword>
+      </Keywords>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Element Type List</Title>
+      <Author>innovoCAD</Author>
+      <Description>Return a List&lt;&gt; of MSElementTypes.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEElementTypeList</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+      </References>
+      <Declarations>
+      </Declarations>
+      <Code Language="csharp" Kind="method body" Delimiter="$"><![CDATA[
+/// <summary>
+/// Return List of MSElementType
+/// </summary>
+/// <returns></returns>
+List<BDPN.MSElementType> ElementTypeList()
+{
+    //TODO: Modify or add to list.
+    List<BDPN.MSElementType> elementTypeList = new List<BDPN.MSElementType>();
+    elementTypeList.Add(BDPN.MSElementType.None);
+    elementTypeList.Add(BDPN.MSElementType.CellHeader);
+    elementTypeList.Add(BDPN.MSElementType.SharedCellInstance);
+    elementTypeList.Add(BDPN.MSElementType.Line);
+    elementTypeList.Add(BDPN.MSElementType.LineString);
+    elementTypeList.Add(BDPN.MSElementType.Ellipse);
+    elementTypeList.Add(BDPN.MSElementType.Arc);
+    elementTypeList.Add(BDPN.MSElementType.Shape);
+    elementTypeList.Add(BDPN.MSElementType.Tag);
+    elementTypeList.Add(BDPN.MSElementType.Text);
+    elementTypeList.Add(BDPN.MSElementType.TextNode);
+    return elementTypeList;
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

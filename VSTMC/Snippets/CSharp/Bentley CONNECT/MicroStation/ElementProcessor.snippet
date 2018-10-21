@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Keywords>
+        <Keyword>dgnFile;Open;Create</Keyword>
+      </Keywords>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ElementProcessor</Title>
+      <Author>innovoCAD</Author>
+      <Description>Process elements from scan criteria.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEElementProcessor</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+      </References>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>element</ID>
+          <ToolTip>element</ToolTip>
+          <Default>element</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>modelRef</ID>
+          <ToolTip>modelRef</ToolTip>
+          <Default>modelRef</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Kind="method decl" Delimiter="$"><![CDATA[
+/// <summary>
+/// Process elements using scan criteria.
+/// </summary>
+/// <param name="element"></param>
+/// <param name="modelRef"></param>
+/// <returns></returns>
+public BDPN.StatusInt ElementProcessor(BDPN.Elements.Element element, BDPN.DgnModelRef modelRef)
+{                      
+    //TODO: Add code here.
+
+     return BDPN.StatusInt.Success;
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

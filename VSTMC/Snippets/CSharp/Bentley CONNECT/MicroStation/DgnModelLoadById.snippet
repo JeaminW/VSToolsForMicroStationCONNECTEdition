@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Keywords>
+        <Keyword>dgnFile;Open;Create</Keyword>
+      </Keywords>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>DgnModel Load By Id</Title>
+      <Author>innovoCAD</Author>
+      <Description>Load DgnModel. DgnFile object must be created and loaded prior to this snippet.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEDgnModelLoadById</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+      </References>
+      <Declarations>
+      </Declarations>
+      <Code Language="csharp" Kind="method body" Delimiter="$"><![CDATA[
+//DgnFile object must be created and loaded prior to this snippet.
+BDPN.StatusInt dgnModelStatus;
+BDPN.DgnModel dgnModel = dgnFile.LoadRootModelById(out dgnModelStatus, modelId);
+if (dgnModelStatus == BDPN.StatusInt.Success)
+{
+    //TODO: Add code here for successfully loaded dgnModel.
+    $end$
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

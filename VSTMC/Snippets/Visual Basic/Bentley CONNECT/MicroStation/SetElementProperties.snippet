@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Keywords>
+        <Keyword>
+        </Keyword>
+      </Keywords>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Set Element Properties</Title>
+      <Author>innovoCAD</Author>
+      <Description>Changing element symbology and properties.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCESetElementProp</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+        <Reference>
+          <Assembly>Ustation</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+        <Import>
+          <Namespace>BM = Bentley.MstnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+      </Declarations>
+      <Code Language="vb" Kind="method decl" Delimiter="$"><![CDATA[''' <summary>
+''' Set element properties.
+''' </summary>
+''' <param name="element"></param>
+''' <returns></returns>
+Private Shared Function SetElementProperties(element As BDPN.Elements.Element) As Boolean
+	Using elementPropertiesSetter As New BDPN.ElementPropertiesSetter()
+		'TODO: Modify code for your needs.
+		elementPropertiesSetter.SetLevel(BM.Settings.ActiveLevelId)
+		elementPropertiesSetter.SetColor(BDPN.SymbologyValue.ColorByLevel)
+		elementPropertiesSetter.SetLinestyle(CInt(BDPN.SymbologyValue.StyleByLevel), Nothing)
+		elementPropertiesSetter.SetWeight(BDPN.SymbologyValue.WeightByLevel)
+
+		Return elementPropertiesSetter.Apply(element)
+	End Using
+End Function]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

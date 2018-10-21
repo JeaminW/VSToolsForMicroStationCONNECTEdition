@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>MicroStation CONNECT Add-in Lite </Name>
+    <Description>MicroStation CONNECT Add-in without key-ins Lite.</Description>
+    <Icon>MS.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+    <MaxFrameworkVersion>4.6</MaxFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>d225c9b6-51b5-4942-af69-73ddb9eac8b3</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>MSAddin</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <NumberOfParentCategoriesToRollUp>2</NumberOfParentCategoriesToRollUp>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" TargetFileName="$safeprojectname$.cs">MSAppNET.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.resx">Resources.resx</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.MicroStationCONNECT.ProjectControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2c1fea8d6bcf193e</Assembly>
+    <FullClassName>innovoCAD.Bentley.MicroStationCONNECT.ProjectControl.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

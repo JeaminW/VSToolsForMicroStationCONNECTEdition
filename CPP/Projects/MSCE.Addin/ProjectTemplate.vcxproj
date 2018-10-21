@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="$ToolVersion$" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>$guid1$</ProjectGuid>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>$platformtoolset$</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>$platformtoolset$</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(MSCEMdlappsPath)</OutDir>
+    <LocalDebuggerCommand>$(MSCEPath)$(MSCEBentleyApp)</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments></LocalDebuggerCommandArguments>
+    <LocalDebuggerAttach>false</LocalDebuggerAttach>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <TargetExt>.dll</TargetExt>
+    <IncludePath>$(MSCE_IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(IncludePath);$(IntDir)objects</IncludePath>
+    <ReferencePath>$(MSCE_ReferencePaths_x64);$(VC_ReferencesPath_x64)</ReferencePath>
+    <LibraryPath>$(MSCE_LibraryPath);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(IntDir)objects</LibraryPath>
+    <LinkIncremental>false</LinkIncremental>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(MSCEMdlappsPath)</OutDir>
+    <LocalDebuggerCommand>$(MSCEPath)$(MSCEBentleyApp)</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments></LocalDebuggerCommandArguments>
+    <LocalDebuggerAttach>false</LocalDebuggerAttach>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <TargetExt>.dll</TargetExt>
+    <IncludePath>$(MSCE_IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(IncludePath);$(IntDir)objects</IncludePath>
+    <ReferencePath>$(MSCE_ReferencePaths_x64);$(VC_ReferencesPath_x64)</ReferencePath>
+    <LibraryPath>$(MSCE_LibraryPath);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(IntDir)objects</LibraryPath>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Full</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <PreprocessorDefinitions>BENTLEY_WARNINGS_HIGHEST_LEVEL;WIN32;winNT;__EXCEPTIONS;_VISCXX;_CONVERSION_DONT_USE_THREAD_LOCALE;_SECURE_SCL=0;WIN32_LEAN_AND_MEAN;NTDDI_WIN7SP1=0x06010100;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ObjectFileName>$(IntDir)Objects\</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)objects\objects.pdb</ProgramDataBaseFileName>
+      <DisableSpecificWarnings>4701;4244;4564;4702;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/favor:blend /EHc /c /Zo %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(MSCE_IncludePath);$(IntDir)objects</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(MSCE_LibraryPath);$(IntDir)objects</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bentley.lib;BentleyAllocator.lib;mdlbltin.lib;RmgrTools.lib;BentleyGeom.lib;DgnPlatform.lib;dgnview.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ManifestFile>$(IntDir)objects\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
+      <EnableUAC>false</EnableUAC>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(MSCEMdlappsPath)$(TargetName).pdb</ProgramDatabaseFile>
+      <SetChecksum>true</SetChecksum>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <ImportLibrary>$(IntDir)objects\$(TargetName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <PreprocessorDefinitions>BENTLEY_WARNINGS_HIGHEST_LEVEL;WIN32;winNT;__EXCEPTIONS;_VISCXX;_CONVERSION_DONT_USE_THREAD_LOCALE;_SECURE_SCL=0;WIN32_LEAN_AND_MEAN;NTDDI_WIN7SP1=0x06010100;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ObjectFileName>$(IntDir)Objects\</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)objects\objects.pdb</ProgramDataBaseFileName>
+      <DisableSpecificWarnings>4701;4244;4564;4702;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/favor:blend /EHc /c /Zo %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(MSCE_IncludePath);$(IntDir)objects</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(MSCE_LibraryPath);$(IntDir)objects</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bentley.lib;BentleyAllocator.lib;mdlbltin.lib;RmgrTools.lib;BentleyGeom.lib;DgnPlatform.lib;dgnview.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ManifestFile>$(IntDir)objects\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
+      <EnableUAC>false</EnableUAC>
+      <ProgramDatabaseFile>$(MSCEMdlappsPath)$(TargetName).pdb</ProgramDatabaseFile>
+      <SetChecksum>true</SetChecksum>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <ImportLibrary>$(IntDir)objects\$(TargetName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="$safeprojectname$.cpp" />
+    <ClInclude Include="$safeprojectname$.h" />
+    <ClCompile Include="MicroStationUtilities.cpp" />
+    <ClInclude Include="MicroStationUtilities.h" />
+    <ClInclude Include="Declare_ustnTaskId_Import.h" />
+    <ClInclude Include="std_collection_typedefs.h" />
+    <ClInclude Include="tstring_typedef.h" />
+    <ClCompile Include="ModulVer.cpp" />
+    <ClInclude Include="ModulVer.h" />
+    <None Include="$safeprojectname$.mke" />
+    <ClInclude Include="$safeprojectname$.r" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemDefinitionGroup>
+    <CustomBuildStep>
+      <Command>"$(MSCENativeBuildFile)" "$(MSCEPath)" "$(MSCESDKPath)" "$(IntDir)" "$(ProjectDir)" -aD</Command>
+      <Outputs>$(MSCEMdlappsPath)$(TargetName).dll</Outputs>
+      <Message>Clean Bentley Build</Message>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>"$(MSCENativeBuildFile)" "$(MSCEPath)" "$(MSCESDKPath)" "$(IntDir)" "$(ProjectDir)" +a</Command>
+      <Message>Construct .ma using Make File.</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+</Project>

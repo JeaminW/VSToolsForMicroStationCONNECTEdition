@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Scan Criteria Extensions</Name>
+    <Description>A project item to add the Scan Criteria Extension. One scan criteria extension is necessary per project.</Description>
+    <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <TemplateID>C96EDF00-CEC2-4AD1-89C0-5B222113B585</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+    <DefaultName>ScanCriteriaExtensions.cs</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true" TargetFileName="ScanCriteriaExtensions.cs">ScanCriteriaExtensions.cs</ProjectItem>
+    <CustomParameters>
+      <CustomParameter Name="$item$" Value="MicroStation Scan Criteria Extensions"/>
+      <CustomParameter Name="$language$" Value="CSharp"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

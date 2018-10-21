@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Selection Tool</Name>
+    <Description>A project item that inherits from a DgnElementSetTool class that modifies an element.</Description>
+    <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <TemplateID>c801136b-d71b-47f2-8c17-e7a2db9cf39f</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+    <DefaultName>SelectionTool.cs</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true" OpenInEditor="false">DgnElementSetTool.cs</ProjectItem>
+    <CustomParameters>
+      <CustomParameter Name="$item$" Value="MicroStation Selection Tool"/>
+      <CustomParameter Name="$language$" Value="CSharp"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

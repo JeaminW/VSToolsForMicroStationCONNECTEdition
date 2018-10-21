@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Get Active Color Int</Title>
+      <Author>innovoCAD</Author>
+      <Description>Get Active Color Int.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEGetActiveColorInt</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.MicroStation</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+        <Import>
+          <Namespace>BM = Bentley.MstnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+      </Declarations>
+      <Code Language="vb" Kind="method body" Delimiter="$"><![CDATA[Dim color As Integer = BM.Settings.Color]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

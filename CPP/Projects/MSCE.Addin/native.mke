@@ -1,0 +1,82 @@
+#--------------------------------------------------------------------------------------+
+#   $safeitemname$.mke
+#
+#--------------------------------------------------------------------------------------*/
+
+MDLMKI = $(MSMDE)mki/
+PolicyFile = MicroStationPolicy.mki
+
+appName  = $safeprojectname$
+sAppName = $safeprojectname$
+
+#------------------------------------------------------------------------
+# mdl.mki contains the default rules for creating .rsc, .mo, etc files
+#------------------------------------------------------------------------
+%include $(MDLMKI)mdl.mki
+
+mdlLibs = $(MSMDE)library/
+
+#----------------------------------------------------------------------
+# Create needed output directories if they don't exist
+#----------------------------------------------------------------------
+always:
+    ~mkdir $(o)
+    ~mkdir $(rscObjects)
+    ~mkdir $(mdlapps)
+
+#----------------------------------------------------------------------
+# Compile resource files
+#----------------------------------------------------------------------
+$(rscObjects)$(appName).rsc : $(_MakeFilePath)$(appName).r
+
+#----------------------------------------------------------------------
+# Compile the source files
+#----------------------------------------------------------------------
+$(o)$(appName).obj : $(_MakeFilePath)$(appName).cpp
+
+#----------------------------------------------------------------------
+# Link the DLL
+#----------------------------------------------------------------------
+DLM_NAME                    = $(appName)
+DLM_DEST                    = $(mdlApps)
+RIGHTSCOMPLIANT             = true
+DLM_OBJECT_DEST             = $(o)
+DLM_OBJECT_FILES            = $(o)$(appName).obj
+DLM_LIBDEF_SRC              = $(_MakeFilePath)
+DLM_NO_DEF                  = 1
+DLM_NO_DLS                  = 1
+DLM_NOENTRY                 = 1
+DLM_NO_INITIALIZE_FUNCTION  = 1
+LINKER_LIBRARIES            + $(mdlLibs)bentley.lib
+LINKER_LIBRARIES            + $(mdlLibs)DgnPlatform.lib
+LINKER_LIBRARIES            + $(mdlLibs)Bentley.PrintFoundation.lib
+LINKER_LIBRARIES            + $(mdlLibs)Bentley.PrintDefinitions.lib
+LINKER_LIBRARIES            + $(mdlLibs)BentleyAllocator.lib
+
+# Only for test apps; any delivered app MUST be signed.
+DLM_NO_SIGN = 1
+
+%include $(MDLMKI)dlmlink.mki
+
+#----------------------------------------------------------------------
+# Link the MA
+#----------------------------------------------------------------------
+MA_NAME         = $(appName)
+MA_DEST         = $(DLM_DEST)
+MA_RSC_FILES    = $(rscObjects)$(appName).rsc
+MA_EXT          = .ma
+
+cmdFile = $(o)$(MA_NAME)link.cmd
+
+#----------------------------------------------------------------------
+#  Link and sign the MA
+#----------------------------------------------------------------------
+"$(MA_DEST)$(MA_NAME)$(MA_EXT)" : $(MA_RSC_FILES)
+    $(msg)
+    > $(cmdFile)
+    -o$@
+    $(MA_SPECIAL_LINKOPT)
+    $(MA_RSC_FILES)
+    <
+    $(RLibCmd) @$(cmdFile)
+    ~time

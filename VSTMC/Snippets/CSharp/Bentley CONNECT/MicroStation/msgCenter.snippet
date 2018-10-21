@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Get Message Center</Title>
+      <Author>innovoCAD</Author>
+      <Description>Get Message Center</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEGetMsgcenter</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>BM = Bentley.MstnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <References>
+        <Reference>
+          <Assembly>Bentley.MicroStation</Assembly>
+        </Reference>
+      </References>
+      <Declarations>
+      </Declarations>
+      <Code Language="csharp" Kind="method body" Delimiter="$"><![CDATA[static BM.MessageCenter messageCenter = BM.MessageCenter.Instance;
+$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

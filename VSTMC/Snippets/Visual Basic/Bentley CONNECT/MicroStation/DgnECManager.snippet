@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Get DgnECManager</Title>
+      <Author>innovoCAD</Author>
+      <Description>Get DgnECManager.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEGetDgnECManager</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+        <Reference>
+          <Assembly>Bentley.ECObjects3</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+      </Imports>     
+      <Code Language="vb"
+            Kind="method body"
+            Delimiter="$"><![CDATA[Dim manager As BDPN.DgnEC.DgnECManager = BDPN.DgnEC.DgnECManager.Manager
+]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

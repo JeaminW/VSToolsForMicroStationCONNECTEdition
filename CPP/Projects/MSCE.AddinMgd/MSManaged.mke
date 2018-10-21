@@ -1,0 +1,110 @@
+#----------------------------------------------------------------------
+#
+#     $Source: $safeprojectname$.mke,v $
+#
+#----------------------------------------------------------------------
+appName         = $safeprojectname$
+sAppName        = $(appName)
+
+%if !defined (BSI)
+MSJ_SKIP_SIGNRSCS =1
+DLM_NO_SIGN=1
+DLM_NO_RCSIGN=1
+RIGHTS_NAME=testrights
+ASSEMBLY_KEYFILE            =% $(ASSEMBLY_KEYFILE_DEFAULT)
+%endif
+
+%include        mdl.mki
+#%include        corelibs.mki
+
+#----------------------------------------------------------------------
+#       Define/Create output directories
+#----------------------------------------------------------------------
+always:
+    ~mkdir $(o)
+
+assemblyTargetDir           = $(mdlAsNeeded)
+InternalMicroStationDLL     = $(MS)ustation.dll
+
+#----------------------------------------------------------------------
+# Setting MixedMode = 1 will enable compileForCLRStart/Stop to actually do something.
+# Otherwise they do nothing.
+#----------------------------------------------------------------------
+MixedMode = 1
+
+MixedDllInitializerObjRootName = $(appName).MixedDllInitializer
+MixedDllInitializerNamespaceBegin = namespace $safeprojectname$ {
+%include mixedDllInitializer.mki
+
+#----------------------------------------------------------------------
+# Set up object list
+#----------------------------------------------------------------------
+objList =    \
+$(o)$(appName)$(oext)
+
+%include compileForCLRStart.mki
+
+
+#----------------------------------------------------------------------
+# Define compiler Options
+#----------------------------------------------------------------------
+sharedAssemblies=$(MS)/assemblies/
+ecframeworkAssemblies=$(sharedAssemblies)ECFramework/
+CCompOpts + -AI$(o)
+CCompOpts + -AI$(MS)
+CCompOpts + -AI$(sharedAssemblies)
+CCompOpts + -AI$(ecframeworkAssemblies)
+CCCompOpts + -I$(baseDir)
+
+#----------------------------------------------------------------------
+# Define include paths
+#----------------------------------------------------------------------
+
+#----------------------------------------------------------------------
+# Compile Source Files
+#----------------------------------------------------------------------
+
+
+$(o)$safeprojectname$(oext)            :   $(baseDir)$safeprojectname$.cpp
+
+%include compileForCLRStop.mki
+
+#----------------------------------------------------------------------
+#   Set up to use dlmcomp.mki and dlmlink.mki
+#----------------------------------------------------------------------
+%undef DLM_NOMSBUILTINS
+DLM_OBJECT_DEST         = $(o)
+DLM_NAME                = $(appname)
+DLM_DEST                = $(mdlapps)
+DLM_OBJECT_FILES        = $(objList) $(mdlLibs)mdlbltin.lib
+DLM_NOMSBUILTINS        = 1
+DLM_NO_DELAYLOAD        = 1
+DLM_NO_DEF              = 1
+DLM_NO_DLS              = 1
+
+%undef ASSEMBLY_NO_VERSION_RESOURCE
+
+ASSEMBLY_VERSION        = 1.0.0.1
+ASSEMBLY_TITLE          = $safeprojectname$
+ASSEMBLY_DESCRIPTION    = $safeprojectname$
+ASSEMBLY_PRODUCT_NAME   = $safeprojectname$
+ASSEMBLY_STRONGNAME     = 0
+
+ASSEMBLY_RES_TO_ADD_DIRECTORY = $(baseDir)
+
+%if !defined (BSI)
+%undef ASSEMBLY_STRONGNAME
+set BSITOOLS=$(o)
+ASSEMBLY_FILE_VERSION = 1.0.0.1
+ASSEMBLY_COMPANY_NAME = $registeredorganization$
+ASSEMBLY_COPYRIGHT    = Copyright © $registeredorganization$ $year$ All Rights Reserved.
+
+%include AssemblyDeflateResourceAppend.mki
+
+%include LinkMixedAddIn.mki
+%else
+%include AssemblyDeflateResourceAppend.mki
+%include mstnLinkMixedAddin.mki
+
+%endif
+

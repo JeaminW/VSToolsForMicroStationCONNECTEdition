@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+      <Title>HitPath</Title>
+      <Author>innovoCAD</Author>
+      <Description>HitPath</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEHitPath</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+      </References>
+      <Declarations>
+      </Declarations>
+      <Code Language="csharp" Kind="method body" Delimiter="$"><![CDATA[BentleyDgnPlatformNET.HitPath hitPath = DoLocate(ev, true, 1);
+if (null != hitPath)
+{
+    BentleyDgnPlatformNET.Elements.Element element = hitPath.GetCursorElement();
+    $selected$ $end$
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

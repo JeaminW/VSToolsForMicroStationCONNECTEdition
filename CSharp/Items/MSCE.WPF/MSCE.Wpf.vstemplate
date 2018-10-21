@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>User Control (Wpf)</Name>
+    <Description>A project item to create a Wpf UserControl.</Description>
+    <Icon Package="{b3bae735-386c-4030-8329-ef48eeda4036}" ID="4593" />
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <TemplateID>9cc0d1c6-1297-45b8-a8cb-9771e2ce66a1</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+    <DefaultName>UserControl.xaml</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System.Drawing</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.Windows.Forms</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.Xaml</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>PresentationCore</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>PresentationFramework</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>WindowsBase</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>WindowsFormsIntegration</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>Bentley.UI</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>Bentley.UI.Vendor.WPF</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>Bentley.RibbonView</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>Bentley.MicroStation.Ribbon</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs" >UserControl.cs</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs\$fileinputname$.xaml" DependentUpon="$fileinputname$.cs">UserControl.xaml</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.xaml.cs" >UserControl.xaml.cs</ProjectItem>
+    <CustomParameters>
+      <CustomParameter Name="$item$" Value="MicroStation UserControl (WPF)"/>
+      <CustomParameter Name="$language$" Value="CSharp"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

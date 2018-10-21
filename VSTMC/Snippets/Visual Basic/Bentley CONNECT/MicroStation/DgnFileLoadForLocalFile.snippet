@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Keywords>
+        <Keyword>dgnFile;Open;Create</Keyword>
+      </Keywords>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>DgnFile Load For Local File</Title>
+      <Author>innovoCAD</Author>
+      <Description>Create a DgnFile object for a local Dgn File that can be used to load parts of a file.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEDgnFileLoadForLocalFile</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+      </Declarations>
+      <Code Language="vb" Kind="method body" Delimiter="$"><![CDATA[
+'From DgnPlatformNet.chm help documentation
+'Create a DgnFile object that can be used to load parts of a file.
+'The DgnFileOwner object keeps the DgnFile open. A program that calls DgnFile.Create must hold reference
+'to the DgnFileOwner object until it is finished with the DgnFile object.
+'Then it must call Dispose on that object. If a program fails to Dispose of a DgnFileOwner object and the
+'garbage collector invokes the Finalizer for that object, the Finalizer throws an exception.
+
+Dim targetDgnDocument As BDPN.DgnDocument = BDPN.DgnDocument.CreateForLocalFile("dgnFilePath")
+Dim dgnFileOwner As BDPN.DgnFileOwner = BDPN.DgnFile.Create(targetDgnDocument, BDPN.DgnFileOpenMode.ReadWrite)
+Dim dgnFile As BDPN.DgnFile = dgnFileOwner.DgnFile
+Dim dgnFilePtr As System.IntPtr = dgnFileOwner.DgnFile.GetNative
+Dim errorDetails As BDPN.StatusInt
+Dim dgnModel As BDPN.DgnModel = dgnFile.LoadRootModelById(errorDetails, dgnFile.DefaultModelId)
+
+dgnFileOwner.Dispose]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

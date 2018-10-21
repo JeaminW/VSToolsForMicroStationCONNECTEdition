@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Set Active Color</Title>
+      <Author>innovoCAD</Author>
+      <Description>Set Active Color.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCESetActiveColor</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+        <Import>
+          <Namespace>BM = Bentley.MstnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+        <Reference>
+          <Assembly>Bentley.MicroStation</Assembly>
+        </Reference>
+      </References>
+      <Declarations>
+      </Declarations>
+      <Code Language="csharp" Kind="method body" Delimiter="$"><![CDATA[BDPN.ElementColor elementColor = new BDPN.ElementColor(BDPN.ColorSupports.Rgb);            
+elementColor.Rgb = System.Drawing.Color.Blue;
+BM.Settings.SetActiveColor(elementColor);]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

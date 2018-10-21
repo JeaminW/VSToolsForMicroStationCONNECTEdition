@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>IPrimitive Command Windows Form</Name>
+    <Description>A project item to implement the IPrimitiveCommandEvents interface that implements a new element-creation command with a custom Windows Form Tool Settings.</Description>
+    <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <TemplateID>612F92C1-1EE0-44D0-8998-D4CF9947BC23</TemplateID>
+    <DefaultName>IPrimitive.vb</DefaultName>
+    <ProjectType>VisualBasic</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>Bentley.Interop.MicroStationDGN</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.Drawing</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.Windows.Forms</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.vb">PrimitiveToolWin.vb</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.vb\$fileinputname$Form.vb" DependentUpon="$fileinputname$.vb">Form.vb</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$Form.Designer.vb">Form.Designer.vb</ProjectItem>
+    <CustomParameters>
+      <CustomParameter Name="$item$" Value="MicroStation IPrimitive Tool Settings"/>
+      <CustomParameter Name="$language$" Value="VisualBasic"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Windows Form</Name>
+    <Description>A project item to create a Windows Form.</Description>
+    <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <TemplateID>8cc697b1-c657-40cf-9f15-ff394226c999</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+    <DefaultName>Form.cs</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System.Drawing</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.Windows.Forms</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true">Form.cs</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$safeitemname$.Designer.cs">Form.Designer.cs</ProjectItem>
+    <CustomParameters>
+      <CustomParameter Name="$item$" Value="MicroStation Windows Form"/>
+      <CustomParameter Name="$language$" Value="CSharp"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="transkit">
+      <UniqueIdentifier>{4f40be58-62c5-4790-a06a-2db7aae5f46d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Documentation">
+      <UniqueIdentifier>{119cfcac-5db5-4e45-a8b6-b778b952d480}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$safeprojectname$.mke" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$safeprojectname$.r">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$safeprojectname$cmd.r">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="transkit\$safeprojectname$txt.h">
+      <Filter>transkit</Filter>
+    </ClInclude>
+    <ClInclude Include="transkit\transkit.xml">
+      <Filter>transkit</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StyleSheet.css">
+      <Filter>Documentation</Filter>
+    </None>
+    <None Include="index.html">
+      <Filter>Documentation</Filter>
+    </None>
+  </ItemGroup>
+</Project>

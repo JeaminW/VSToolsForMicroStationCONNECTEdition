@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Keywords>
+        <Keyword>
+        </Keyword>
+      </Keywords>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Create New Model</Title>
+      <Author>innovoCAD</Author>
+      <Description>Create a new model from seed model.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCECreateNewModel</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+      </Declarations>
+      <Code Language="vb" Kind="method body" Delimiter="$"><![CDATA[
+'DgnFile object and Seed Model from Seed DgnFile object must be created and loaded prior to this snippet.
+Dim dgnNewModelStatus As BDPN.DgnModelStatus
+Dim dgnModel As BDPN.DgnModel = activeDgnFile.CreateNewModel(dgnNewModelStatus, "modelName", BDPN.DgnModelType.Drawing, False, seedModel)]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

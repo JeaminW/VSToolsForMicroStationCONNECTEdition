@@ -1,8 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.VSSDK.BuildTools.15.8.3252\build\Microsoft.VSSDK.BuildTools.props" Condition="Exists('..\packages\Microsoft.VSSDK.BuildTools.15.8.3252\build\Microsoft.VSSDK.BuildTools.props')" />
   <PropertyGroup>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <UseCodebase>true</UseCodebase>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VS2015|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\VS2015\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -17,14 +36,20 @@
     <AssemblyName>VSTMC</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
-    <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
-    <IncludeDebugSymbolsInVSIXContainer>false</IncludeDebugSymbolsInVSIXContainer>
-    <IncludeDebugSymbolsInLocalVSIXDeployment>false</IncludeDebugSymbolsInLocalVSIXDeployment>
-    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+    <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
+    <IncludeDebugSymbolsInVSIXContainer>true</IncludeDebugSymbolsInVSIXContainer>
+    <IncludeDebugSymbolsInLocalVSIXDeployment>true</IncludeDebugSymbolsInLocalVSIXDeployment>
+    <CopyBuildOutputToOutputDirectory>true</CopyBuildOutputToOutputDirectory>
     <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
     <StartAction>Program</StartAction>
     <StartProgram Condition="'$(DevEnvDir)' != ''">$(DevEnvDir)devenv.exe</StartProgram>
     <StartArguments>/rootsuffix Exp</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VS2015|AnyCPU'">
+    <StartProgram>F:\Program Files %28x86%29\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe</StartProgram>
+    <StartArguments>/rootsuffix Exp</StartArguments>
+    <StartAction>Program</StartAction>
+    <DeployTargetInstanceId />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,21 +67,780 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CopyVsixExtensionFiles>False</CopyVsixExtensionFiles>
+    <CopyVsixExtensionLocation>
+    </CopyVsixExtensionLocation>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BentleyDataCollector\BentleyDataCollector.cs" />
+    <Compile Include="Tools\NativeImportCommand.cs" />
+    <Compile Include="Tools\OpenFolderCommand.cs" />
+    <Compile Include="Tools\OpenMdlAppsFolderCommand.cs" />
+    <Compile Include="Tools\OpenSDKFolderCommand.cs" />
+    <Compile Include="Options\OptionsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Options\OptionsControl.Designer.cs">
+      <DependentUpon>OptionsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options\OptionsPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\GuidStrings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\SearchBentleyForumsCommand.cs" />
+    <Compile Include="Utilities\Utilities.cs" />
+    <Compile Include="VSPackage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VSPackage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="VSTMCPackage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\eula.rtf">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\GettingStarted.rtf">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Browse.png" />
+    <Content Include="Resources\LockedPadlock.png" />
+    <Content Include="Resources\OpenedPadlock.png" />
+    <Content Include="Resources\OpenSDKFolder.png" />
+    <Content Include="Resources\OptionsPageImage.png" />
+    <Content Include="Resources\Logo.ico">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="VSTMC.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <None Include="app.config" />
+    <None Include="Key.snk" />
+    <None Include="Resources\KeyinTree.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\MarkDown.md" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Resources\ReleaseNotes.rtf">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\CreateNewModel.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnAttachmentFromFile.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnECManager.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnElementSetTool\HitPath.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnElementSetTool\OnDataButton.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnElementSetTool\OnDynamicFrame.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnElementSetTool\OnPostInstall.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnElementSetTool\OnPreElementModify.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnFileLoadForLocalFile.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnModelByName.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnModelIndexCollection.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\DgnModelLoadById.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\ElementProcessor.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\ElementTypeList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\GetCellLibraryCollection.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\GetDgnFileLevelCache.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\GetDimensionStylesCollection.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\GetElementProperites.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\GetModelIdByName.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\MSCEHighlightElement.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\msgCenter.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Notification.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\ParseTypeName.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\ScanCriteria.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Session\GetActiveDgnFile.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Session\GetActiveDgnModel.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Session\GetActiveDgnModelRef.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Session\SendKeyin.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\SetElementProperites.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Settings\GetActiveColor.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Settings\GetActiveColorInt.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Settings\GetActiveLevelId.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Settings\GetLineWeightInt.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Settings\SetActiveColor.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\MicroStation\Settings\SetLineWeightInt.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\CreateNewModel.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnAttachmentFromFile.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnECManager.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnElementSetTool\HitPath.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnElementSetTool\OnDataButton.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnElementSetTool\OnDynamicFrame.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnElementSetTool\OnPostInstall.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnElementSetTool\OnPreElementModify.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnFileLoadForLocalFile.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnModelByName.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnModelIndexCollection.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\DgnModelLoadById.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\ElementProcessor.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\ElementTypeList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\GetCellLibraryCollection.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\GetDgnFileLevelCache.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\GetDimensionStylesCollection.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\GetElementProperties.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\GetModelIdByName.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\MSCEHighlightElement.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\msgCenter.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Notification.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\ParseTypeName.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\ScanCriteria.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Session\GetActiveDgnFile.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Session\GetActiveDgnModel.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Session\GetActiveDgnModelRef.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Session\SendKeyin.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\SetElementProperties.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Settings\GetActiveColor.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Settings\GetActiveColorInt.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Settings\GetActiveLevelId.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Settings\GetLineWeightInt.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Settings\SetActiveColor.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Settings\SetLineWeightInt.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
-    <Content Include="stylesheet.css" />
+    <Content Include="Resources\Files\CONNECTFilters.txt" />
+    <Content Include="Resources\Files\CONNECTmke.txt" />
+    <Content Include="Resources\Files\CONNECTvcproj.txt" />
+    <Resource Include="Resources\FolderOpen.png" />
+    <Content Include="Resources\ImageStrip.png" />
+    <Content Include="Resources\__PreviewImage.png">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Resource Include="Resources\LockedPadlock.ico" />
+    <Content Include="Resources\MicroStationIcon.ico" />
+    <Content Include="Resources\MicroStation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Resource Include="Resources\OpenedPadlock.ico" />
+    <VSCTCompile Include="VSTMCPackage.vsct">
+      <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
+    </VSCTCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EnvDTE100, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EnvDTE90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.CoreUtility.15.5.27130\lib\net45\Microsoft.VisualStudio.CoreUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Imaging, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Imaging.15.5.27130\lib\net45\Microsoft.VisualStudio.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Microsoft.VisualStudio.OLE.Interop.7.10.6071\lib\Microsoft.VisualStudio.OLE.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.14.0.14.3.25407\lib\Microsoft.VisualStudio.Shell.14.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Immutable.10.0.10.0.30319\lib\net40\Microsoft.VisualStudio.Shell.Immutable.10.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Immutable.11.0.11.0.50727\lib\net45\Microsoft.VisualStudio.Shell.Immutable.11.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Immutable.12.0.12.0.21003\lib\net45\Microsoft.VisualStudio.Shell.Immutable.12.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Immutable.14.0.14.3.25407\lib\net45\Microsoft.VisualStudio.Shell.Immutable.14.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Interop.7.10.6072\lib\net11\Microsoft.VisualStudio.Shell.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Interop.10.0.10.0.30320\lib\net20\Microsoft.VisualStudio.Shell.Interop.10.0.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Interop.11.0.11.0.61031\lib\net20\Microsoft.VisualStudio.Shell.Interop.11.0.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Interop.12.0.12.0.30111\lib\net20\Microsoft.VisualStudio.Shell.Interop.12.0.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.14.0.DesignTime, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Interop.14.0.DesignTime.14.3.26929\lib\net20\Microsoft.VisualStudio.Shell.Interop.14.0.DesignTime.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.15.3.DesignTime, Version=15.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Interop.15.3.DesignTime.15.0.26929\lib\net20\Microsoft.VisualStudio.Shell.Interop.15.3.DesignTime.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.15.6.DesignTime, Version=15.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Interop.15.6.DesignTime.15.6.27413\lib\net20\Microsoft.VisualStudio.Shell.Interop.15.6.DesignTime.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Interop.8.0.8.0.50728\lib\net11\Microsoft.VisualStudio.Shell.Interop.8.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Microsoft.VisualStudio.Shell.Interop.9.0.9.0.30730\lib\net11\Microsoft.VisualStudio.Shell.Interop.9.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Text.Data, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Text.Data.15.5.27130\lib\net45\Microsoft.VisualStudio.Text.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Microsoft.VisualStudio.TextManager.Interop.7.10.6071\lib\net11\Microsoft.VisualStudio.TextManager.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Microsoft.VisualStudio.TextManager.Interop.8.0.8.0.50728\lib\net11\Microsoft.VisualStudio.TextManager.Interop.8.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Threading, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Threading.14.1.131\lib\net45\Microsoft.VisualStudio.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Utilities, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Utilities.14.3.25407\lib\net45\Microsoft.VisualStudio.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Validation, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Validation.14.1.111\lib\net45\Microsoft.VisualStudio.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net46\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net46\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Options\OptionsControl.resx">
+      <DependentUpon>OptionsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VSPackage.resx">
+      <MergeWithCTO>true</MergeWithCTO>
+      <ManifestResourceName>VSPackage</ManifestResourceName>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>VSPackage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CPP\Projects\MSCE.AddinMgd\MSCE.AddinMgd.VC.csproj">
+      <Project>{773D498B-19FF-4E77-BC20-5DC3A0C9F616}</Project>
+      <Name>MSCE.AddinMgd.VC</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CPP\Projects\MSCE.Addin\MSCE.Addin.VC.csproj">
+      <Project>{60444E5B-A2A5-4D69-BC36-BBC035039044}</Project>
+      <Name>MSCE.Addin.VC</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CPP\Projects\MSCE.KeyinMgd\MSCE.KeyinMgd.VC.csproj">
+      <Project>{FBC7C1FC-D684-4F0B-8578-8CCFE52A4608}</Project>
+      <Name>MSCE.KeyinMgd.VC</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CPP\Projects\MSCE.Keyin\MSCE.Keyin.VC.csproj">
+      <Project>{CEC26EAE-FB35-40BE-B407-9AA3A82F74E3}</Project>
+      <Name>MSCE.Keyin.VC</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.Class.csitem\MSCE.Class.csitem.csproj">
+      <Project>{DAAB47FA-6ACE-4CC0-B501-28AD6B27A9AD}</Project>
+      <Name>MSCE.Class.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.ElementSetTool\MSCE.ElemSetTool.csitem.csproj">
+      <Project>{A919E9D4-2A3C-427C-BDB1-4F8353BEEF5B}</Project>
+      <Name>MSCE.ElemSetTool.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.ElementWin\MSCE.ElemWin.csitem.csproj">
+      <Project>{A20DFE82-1C4A-4AA9-8E81-A6DA36F10BB4}</Project>
+      <Name>MSCE.ElemWin.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.ElementWpf\MSCE.ElemWpf.csitem.csproj">
+      <Project>{38538C79-C81F-4D73-B1E9-F50D26A239F0}</Project>
+      <Name>MSCE.ElemWpf.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.IPrimWin\MSCE.IPrimWin.csitem.csproj">
+      <Project>{89E55AD3-0D35-4B6A-84C4-AB2F564D2BAE}</Project>
+      <Name>MSCE.IPrimWin.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.IPrimWpf\MSCE.IPrimWpf.csitem.csproj">
+      <Project>{92BE8D19-2F95-4B5F-99E1-A2BDE5CB12BA}</Project>
+      <Name>MSCE.IPrimWpf.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.Keyin\MSCE.Keyin.csitem.csproj">
+      <Project>{11B70144-6102-479B-898E-EFE74D81AC18}</Project>
+      <Name>MSCE.Keyin.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.PrimitiveTool\MSCE.PrimTool.csitem.csproj">
+      <Project>{5F438EF1-7FF3-4BE2-9729-3F07D72514B8}</Project>
+      <Name>MSCE.PrimTool.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.PrimWin\MSCE.PrimWin.csitem.csproj">
+      <Project>{9903AFBD-DED8-4AC8-AA44-D8789834A1BE}</Project>
+      <Name>MSCE.PrimWin.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.PrimWpf\MSCE.PrimWpf.csitem.csproj">
+      <Project>{1A49754B-609E-4696-AFA3-CC019BB407E9}</Project>
+      <Name>MSCE.PrimWpf.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.ScanCriteria\MSCE.ScanCriteria.csitem.csproj">
+      <Project>{EDABEB62-6EE2-4113-8062-0F3A2C74B406}</Project>
+      <Name>MSCE.ScanCriteria.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.Toolbar\MSCE.Toolbar.csitem.csproj">
+      <Project>{EAF30A99-073C-468F-9910-BAD34B3BA255}</Project>
+      <Name>MSCE.Toolbar.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.WinForm\MSCE.WinForm.csitem.csproj">
+      <Project>{420DFA7B-209A-442B-808F-DAFE8CA10660}</Project>
+      <Name>MSCE.WinForm.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Items\MSCE.WPF\MSCE.WPF.csitem.csproj">
+      <Project>{15EC6B9E-C414-4C4F-BFED-88AD6B1C2CF3}</Project>
+      <Name>MSCE.WPF.csitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Projects\MSCE.Addin\MSCE.Addin.CS.csproj">
+      <Project>{5352008A-056D-499B-956B-E92E44C52A5C}</Project>
+      <Name>MSCE.Addin.CS</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Projects\MSCE.Keyin\MSCE.Keyin.CS.csproj">
+      <Project>{C62698F8-9CE8-4E4C-8111-E87B3ED77801}</Project>
+      <Name>MSCE.Keyin.CS</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Projects\MSCE.WinForm\MSCE.WinForm.CS.csproj">
+      <Project>{B3141432-307A-453E-B18C-743279EEA87B}</Project>
+      <Name>MSCE.WinForm.CS</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharp\Projects\MSCE.WPF\MSCE.WPF.CS.csproj">
+      <Project>{1B9DC78D-BE05-4A22-ADD4-DB4315D04266}</Project>
+      <Name>MSCE.WPF.CS</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.Class.vbitem\MSCE.Class.vbitem.vbproj">
+      <Project>{431277AE-AA11-422D-ABBE-F18C2D5E2305}</Project>
+      <Name>MSCE.Class.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.ElementSetTool\MSCE.ElemSetTool.vbitem.vbproj">
+      <Project>{25F1BD0A-9FDE-4C99-8390-F2D49F9B3252}</Project>
+      <Name>MSCE.ElemSetTool.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.ElementWin\MSCE.ElemWin.vbitem.csproj">
+      <Project>{E1D05043-4C4A-49BB-AFB9-55AA84FD63CF}</Project>
+      <Name>MSCE.ElemWin.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.ElementWpf\MSCE.ElemWpf.vbitem.vbproj">
+      <Project>{05FFB091-709C-4066-A0AC-2B6072ACFB3E}</Project>
+      <Name>MSCE.ElemWpf.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.IPrimWin\MSCE.IPrimWin.vbitem.csproj">
+      <Project>{A153926C-5C6C-4A62-B241-9DCEBD7F9C5F}</Project>
+      <Name>MSCE.IPrimWin.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.IPrimWpf\MSCE.IPrimWpf.vbitem.vbproj">
+      <Project>{2DA130BC-CF01-4D73-B874-DA766CFD4438}</Project>
+      <Name>MSCE.IPrimWpf.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.Keyin\MSCE.Keyin.vbitem.vbproj">
+      <Project>{A1D0238F-6513-454D-B66E-916C794DC1B9}</Project>
+      <Name>MSCE.Keyin.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.PrimitiveTool\MSCE.PrimTool.vbitem.vbproj">
+      <Project>{EFCC953F-8AF1-44A1-BAE2-7B82C154D237}</Project>
+      <Name>MSCE.PrimTool.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.PrimWin\MSCE.PrimWin.vbitem.csproj">
+      <Project>{6157BF1E-1A3C-4A62-9874-E5683C3F6F29}</Project>
+      <Name>MSCE.PrimWin.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.PrimWpf\MSCE.PrimWpf.vbitem.vbproj">
+      <Project>{53CE6655-EF74-4707-B50D-468087C38506}</Project>
+      <Name>MSCE.PrimWpf.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.ScanCriteria.vbitem\MSCE.ScanCriteria.vbitem.vbproj">
+      <Project>{DCE4B83C-926B-4B33-B47D-E05C79E1036D}</Project>
+      <Name>MSCE.ScanCriteria.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.Toolbar\MSCE.Toolbar.vbitem.vbproj">
+      <Project>{4400C95E-2E3C-4613-A2F5-B56BC42A64DC}</Project>
+      <Name>MSCE.Toolbar.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.WinForms\MSCE.WinForm.vbitem.vbproj">
+      <Project>{A2B37446-A59D-4F5C-99DC-821A3661FEED}</Project>
+      <Name>MSCE.WinForm.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Items\MSCE.WPF\MSCE.WPF.vbitem.vbproj">
+      <Project>{177627E9-104D-453F-936A-BB9963E363C5}</Project>
+      <Name>MSCE.WPF.vbitem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Projects\MSCE.Addin\MSCE.Addin.VB.vbproj">
+      <Project>{36230612-ABB5-4387-8579-093FAE72FC10}</Project>
+      <Name>MSCE.Addin.VB</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Projects\MSCE.Keyin\MSCE.Keyin.VB.vbproj">
+      <Project>{644E259F-114A-486F-85F3-309E3B2513BE}</Project>
+      <Name>MSCE.Keyin.VB</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Projects\MSCE.WinForm\MSCE.WinForm.VB.vbproj">
+      <Project>{8508C9E4-C7BC-4150-9DA9-3231F908E7DB}</Project>
+      <Name>MSCE.WinForm.VB</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Visual Basic\Projects\MSCE.WPF\MSCE.WPF.VB.vbproj">
+      <Project>{E1015391-2A53-4A52-A4D1-99C729A515A2}</Project>
+      <Name>MSCE.WPF.VB</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Wizard\innovoCAD.Bentley.CONNECT.csproj">
+      <Project>{BF0D5A88-9D6D-4B8B-9005-D23E9C363DA9}</Project>
+      <Name>innovoCAD.Bentley.CONNECT</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Snippets\Visual C++\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.VisualStudio.SDK.Analyzers.15.8.36\analyzers\cs\Microsoft.VisualStudio.SDK.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.168\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.VSSDK.BuildTools.15.8.3252\build\Microsoft.VSSDK.BuildTools.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VSSDK.BuildTools.15.8.3252\build\Microsoft.VSSDK.BuildTools.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VSSDK.BuildTools.15.8.3252\build\Microsoft.VSSDK.BuildTools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VSSDK.BuildTools.15.8.3252\build\Microsoft.VSSDK.BuildTools.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.SDK.EmbedInteropTypes.15.0.21\build\Microsoft.VisualStudio.SDK.EmbedInteropTypes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.SDK.EmbedInteropTypes.15.0.21\build\Microsoft.VisualStudio.SDK.EmbedInteropTypes.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.168\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.168\build\Microsoft.VisualStudio.Threading.Analyzers.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.SDK.Analyzers.15.8.36\build\Microsoft.VisualStudio.SDK.Analyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.SDK.Analyzers.15.8.36\build\Microsoft.VisualStudio.SDK.Analyzers.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">C:/Cert/signtool.exe sign /f "c:\cert\innovoCAD.pfx" /p %25sign%25 /tr http://timestamp.digicert.com /v /td sha256 /fd sha256 /sha1 "51af73f1e3cb00dff4d129d7fdfabd98ec2c9e9f" "C:\Users\MARTYR~1\source\repos\VSTMC\VSTMC\bin\Release\INNOVO~1.DLL"
+C:/Cert/signtool.exe verify /pa /v C:\Users\MARTYR~1\source\repos\VSTMC\VSTMC\bin\Release\INNOVO~1.DLL
+C:/Cert/signtool.exe sign /f "c:\cert\innovoCAD.pfx" /p %25sign%25 /tr http://timestamp.digicert.com /v /td sha256 /fd sha256 /sha1 "51af73f1e3cb00dff4d129d7fdfabd98ec2c9e9f" "C:\Users\MARTYR~1\source\repos\VSTMC\VSTMC\bin\Release\VSTMC.dll"
+C:/Cert/signtool.exe verify /pa /v C:\Users\MARTYR~1\source\repos\VSTMC\VSTMC\bin\Release\VSTMC.dll
+F:\PROGRA~2\7-Zip\7z a "C:\Users\Marty Robbins\source\repos\VSTMC\VSTMC\bin\Release\VSTMC.vsix" "C:\Users\Marty Robbins\source\repos\VSTMC\VSTMC\bin\Release\VSTMC.dll"
+F:\PROGRA~2\7-Zip\7z a "C:\Users\Marty Robbins\source\repos\VSTMC\VSTMC\bin\Release\VSTMC.vsix" "C:\Users\Marty Robbins\source\repos\VSTMC\VSTMC\bin\Release\innovoCAD.Bentley.CONNECT.dll"
+F:\Documents\VISUAL~1\Projects\VISUAL~1\VSTM28\packages\MICROS~1.254\tools\vssdk\VSIXSI~1.EXE sign /f "c:\cert\innovoCAD.pfx" /p %25sign%25 /tr http://timestamp.digicert.com /v /td sha256 /fd sha256 /sha1 "51af73f1e3cb00dff4d129d7fdfabd98ec2c9e9f" "C:\Users\Marty Robbins\source\repos\VSTMC\VSTMC\bin\Release\VSTMC.vsix"
+</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\Microsoft.VSSDK.BuildTools.15.8.3252\build\Microsoft.VSSDK.BuildTools.targets" Condition="Exists('..\packages\Microsoft.VSSDK.BuildTools.15.8.3252\build\Microsoft.VSSDK.BuildTools.targets')" />
+  <Import Project="..\packages\Microsoft.VisualStudio.SDK.EmbedInteropTypes.15.0.21\build\Microsoft.VisualStudio.SDK.EmbedInteropTypes.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.SDK.EmbedInteropTypes.15.0.21\build\Microsoft.VisualStudio.SDK.EmbedInteropTypes.targets')" />
+  <Import Project="..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.168\build\Microsoft.VisualStudio.Threading.Analyzers.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.168\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" />
+  <Import Project="..\packages\Microsoft.VisualStudio.SDK.Analyzers.15.8.36\build\Microsoft.VisualStudio.SDK.Analyzers.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.SDK.Analyzers.15.8.36\build\Microsoft.VisualStudio.SDK.Analyzers.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="$ToolVersion$" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProjectGuid>$guid1$</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <OutputPath>$(MSCEMdlappsPath)</OutputPath>
+    <AppDesignerFolder>My Project</AppDesignerFolder>
+    <AssemblyName>$safeprojectname$</AssemblyName>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <TargetFrameworkVersion>v$targetframeworkversion$</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(MSCEPath)$(MSCEBentleyApp)</StartProgram>
+    <StartArguments></StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <OutputType>Library</OutputType>
+    <OutputPath>$(MSCEMdlappsPath)</OutputPath>
+    <AppDesignerFolder>My Project</AppDesignerFolder>
+    <AssemblyName>$safeprojectname$</AssemblyName>
+    <PlatformTarget>x64</PlatformTarget>
+    <FileAlignment>512</FileAlignment>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(MSCEPath)$(MSCEBentleyApp)</StartProgram>
+    <StartArguments></StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>$(MSCEMdlappsPath)</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(MSCEPath)$(MSCEBentleyApp)</StartProgram>
+    <StartArguments></StartArguments>
+    <DocumentationFile>$safeprojectname$.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Design|x64'">
+    <OutputPath>$(MSCEMdlappsPath)</OutputPath>
+    <DefineConstants>TRACE,DEBUG,DESIGN</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>$(MSCE_ReferencePaths_x64)</ReferencePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Reference>
+      <Private>False</Private>
+    </Reference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include ="ustation">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.DgnDisplayNet">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.DgnPlatformNET">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.General.1.0">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.GeometryNET">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.MicroStation">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include ="Bentley.Windowing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.MicroStation.Interfaces.1.0">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.MicroStation.WPF">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.Interop.MicroStationDGN">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
+    </Reference>
+    $reference$
+    <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.vb"/>
+    <Compile Include="My Project\AssemblyInfo.vb"/>
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>vbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>

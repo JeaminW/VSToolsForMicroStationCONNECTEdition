@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>$guid1$</ProjectGuid>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>$platformtoolset$</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>$platformtoolset$</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup>
+    <intDirectory>$(intDir)</intDirectory>
+    <projectDirectory>$(projectDir)</projectDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeBuildCommandLine>"$(MSCENativeBuildFile)" "$(MSCEPath)" "$(MSCESDKPath)" "$(IntDir)" "$(ProjectDir)" +a</NMakeBuildCommandLine>
+    <NMakeOutput>MSNative1</NMakeOutput>
+    <NMakeCleanCommandLine>"$(MSCENativeBuildFile)" "$(MSCEPath)" "$(MSCESDKPath)" "$(IntDir)" "$(ProjectDir)" +aD</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>"$(MSCENativeBuildFile)" "$(MSCEPath)" "$(MSCESDKPath)" "$(IntDir)" "$(ProjectDir)" +a</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions);BENTLEY_WARNINGS_HIGHEST_LEVEL;WIN32;winNT;__EXCEPTIONS;_VISCXX;_CONVERSION_DONT_USE_THREAD_LOCALE;_SECURE_SCL=0;WIN32_LEAN_AND_MEAN;NTDDI_WIN7SP1=0x06010100;_WINDLL</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(ProjectDir);$(IncludePath);$(MSCE_IncludePath);$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes>$(ProjectDir);$(IncludePath);$(MSCE_IncludePath);$(NMakeForcedIncludes)</NMakeForcedIncludes>
+    <NMakeAssemblySearchPath>$(ReferencePath);$(MSCE_ReferencePaths_x64);$(NMakeAssemblySearchPath)</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies)</NMakeForcedUsingAssemblies>
+    <OutDir>$(MSCEMdlappsPath)</OutDir>
+    <LibraryPath>$(WindowsSdkDir)\common\lib;$(LibraryPath);$(MSCE_LibraryPath)</LibraryPath>
+    <TargetExt>.dll</TargetExt>
+    <LinkIncremental>false</LinkIncremental>
+    <LocalDebuggerCommand>$(MSCEPath)$(MSCEBentleyApp)</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments></LocalDebuggerCommandArguments>
+    <LocalDebuggerAttach>false</LocalDebuggerAttach>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir);$(MSCE_IncludePath);$(IncludePath);$(IntDir)objects</IncludePath>
+    <ReferencePath>$(MSCE_ReferencePaths_x64);$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeBuildCommandLine>"$(MSCENativeBuildFile)" "$(MSCEPath)" "$(MSCESDKPath)" "$(IntDir)" "$(ProjectDir)" +a</NMakeBuildCommandLine>
+    <NMakeOutput>MSNative1</NMakeOutput>
+    <NMakeCleanCommandLine>"$(MSCENativeBuildFile)" "$(MSCEPath)" "$(MSCESDKPath)" "$(IntDir)" "$(ProjectDir)" +aD</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>"$(MSCENativeBuildFile)" "$(MSCEPath)" "$(MSCESDKPath)" "$(IntDir)" "$(ProjectDir)" +a</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions);BENTLEY_WARNINGS_HIGHEST_LEVEL;WIN32;winNT;__EXCEPTIONS;_VISCXX;_CONVERSION_DONT_USE_THREAD_LOCALE;_SECURE_SCL=0;WIN32_LEAN_AND_MEAN;NTDDI_WIN7SP1=0x06010100;_WINDLL</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(ProjectDir);$(IncludePath);$(MSCE_IncludePath);$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes>$(ProjectDir);$(IncludePath);$(MSCE_IncludePath);$(NMakeForcedIncludes)</NMakeForcedIncludes>
+    <NMakeAssemblySearchPath>$(ReferencePath);$(MSCE_ReferencePaths_x64);$(NMakeAssemblySearchPath)</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies)</NMakeForcedUsingAssemblies>
+    <OutDir>$(MSCEMdlappsPath)</OutDir>
+    <LibraryPath>$(WindowsSdkDir)\common\lib;$(LibraryPath);$(MSCE_LibraryPath)</LibraryPath>
+    <TargetExt>.dll</TargetExt>
+    <LinkIncremental>false</LinkIncremental>
+    <LocalDebuggerCommand>$(MSCEPath)$(MSCEBentleyApp)</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments></LocalDebuggerCommandArguments>
+    <LocalDebuggerAttach>true</LocalDebuggerAttach>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir);$(MSCE_IncludePath);$(IncludePath);$(IntDir)objects</IncludePath>
+    <ReferencePath>$(MSCE_ReferencePaths_x64);$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProfileGuidedDatabase>bin\debug\$(TargetName).pgd</ProfileGuidedDatabase>
+      <TargetMachine>MachineX64</TargetMachine>
+      <ManifestFile>bin\debug\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
+      <ImportLibrary>bin\debug\$(TargetName).lib</ImportLibrary>
+      <ProgramDatabaseFile>$(MSCEMdlappsPath)$(TargetName).pdb</ProgramDatabaseFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>

@@ -1,17 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
-  <Metadata>
-    <Identity Id="VSTMC.4a7873f1-a18c-43bd-ad5e-cd67ed280ac1" Version="1.0" Language="en-US" Publisher="innovoCAD" />
-    <DisplayName>VSTMC</DisplayName>
-    <Description>Empty VSIX Project.</Description>
-  </Metadata>
-  <Installation>
-    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 16.0)" />
-  </Installation>
-  <Dependencies>
-    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
-  </Dependencies>
-  <Prerequisites>
-    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,16.0)" DisplayName="Visual Studio core editor" />
-  </Prerequisites>
+    <Metadata>
+        <Identity Id="VSTMC.4a7873f1-a18c-43bd-ad5e-cd67ed280ac1" Version="5.0.0.1" Language="en-US" Publisher="innovoCAD" />
+        <DisplayName>VS Tools for MicroStation CONNECT Edition</DisplayName>
+        <Description xml:space="preserve">Templates and tools for MicroStation CONNECT Edition.</Description>
+        <MoreInfo>https://marketplace.visualstudio.com/items?itemName=vs-publisher-542131.VSToolsForMicroStationCONNECTEdition</MoreInfo>
+        <License>Resources\eula.rtf</License>
+        <GettingStartedGuide>Resources\GettingStarted.rtf</GettingStartedGuide>
+        <ReleaseNotes>Resources\ReleaseNotes.rtf</ReleaseNotes>
+        <Icon>Resources\Logo.ico</Icon>
+        <PreviewImage>Resources\__PreviewImage.png</PreviewImage>
+        <Tags>Bentley,MicroStation,MicroStation CONNECT Edition,C#,CSharp,VB .NET,VB,Visual Basic,BDN, Visual Studio</Tags>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0, 17.0)" />
+        <InstallationTarget Version="[14.0,17.0)" Id="Microsoft.VisualStudio.Pro" />
+        <InstallationTarget Version="[14.0,17.0)" Id="Microsoft.VisualStudio.Enterprise" />
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="innovoCAD.Bentley.CONNECT" Path="|innovoCAD.Bentley.CONNECT|" AssemblyName="|innovoCAD.Bentley.CONNECT;AssemblyName|" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.Addin.VC" d:TargetPath="|MSCE.Addin.VC;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.AddinMgd.VC" d:TargetPath="|MSCE.AddinMgd.VC;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.Keyin.VC" d:TargetPath="|MSCE.Keyin.VC;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.KeyinMgd.VC" d:TargetPath="|MSCE.KeyinMgd.VC;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.Addin.CS" d:TargetPath="|MSCE.Addin.CS;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.Keyin.CS" d:TargetPath="|MSCE.Keyin.CS;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.WPF.CS" d:TargetPath="|MSCE.WPF.CS;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.Addin.VB" d:TargetPath="|MSCE.Addin.VB;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.Keyin.VB" d:TargetPath="|MSCE.Keyin.VB;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.WinForm.VB" d:TargetPath="|MSCE.WinForm.VB;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.WPF.VB" d:TargetPath="|MSCE.WPF.VB;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.Class.csitem" d:TargetPath="|MSCE.Class.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.ElemSetTool.csitem" d:TargetPath="|MSCE.ElemSetTool.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.ElemWin.csitem" d:TargetPath="|MSCE.ElemWin.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.ElemWpf.csitem" d:TargetPath="|MSCE.ElemWpf.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.IPrimWin.csitem" d:TargetPath="|MSCE.IPrimWin.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.IPrimWpf.csitem" d:TargetPath="|MSCE.IPrimWpf.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.Keyin.csitem" d:TargetPath="|MSCE.Keyin.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.PrimTool.csitem" d:TargetPath="|MSCE.PrimTool.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.PrimWin.csitem" d:TargetPath="|MSCE.PrimWin.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.PrimWpf.csitem" d:TargetPath="|MSCE.PrimWpf.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.ScanCriteria.csitem" d:TargetPath="|MSCE.ScanCriteria.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.Toolbar.csitem" d:TargetPath="|MSCE.Toolbar.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.WinForm.csitem" d:TargetPath="|MSCE.WinForm.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.WPF.csitem" d:TargetPath="|MSCE.WPF.csitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.Class.vbitem" d:TargetPath="|MSCE.Class.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.ElemSetTool.vbitem" d:TargetPath="|MSCE.ElemSetTool.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.ElemWin.vbitem" d:TargetPath="|MSCE.ElemWin.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.ElemWpf.vbitem" d:TargetPath="|MSCE.ElemWpf.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.IPrimWin.vbitem" d:TargetPath="|MSCE.IPrimWin.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.IPrimWpf.vbitem" d:TargetPath="|MSCE.IPrimWpf.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.Keyin.vbitem" d:TargetPath="|MSCE.Keyin.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.PrimTool.vbitem" d:TargetPath="|MSCE.PrimTool.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.PrimWin.vbitem" d:TargetPath="|MSCE.PrimWin.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.PrimWpf.vbitem" d:TargetPath="|MSCE.PrimWpf.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.ScanCriteria.vbitem" d:TargetPath="|MSCE.ScanCriteria.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.Toolbar.vbitem" d:TargetPath="|MSCE.Toolbar.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.WinForm.vbitem" d:TargetPath="|MSCE.WinForm.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="MSCE.WPF.vbitem" d:TargetPath="|MSCE.WPF.vbitem;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="MSCE.WinForm.CS" d:TargetPath="|MSCE.WinForm.CS;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+    </Assets>
 </PackageManifest>

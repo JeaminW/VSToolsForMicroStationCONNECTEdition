@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Send Keyin</Title>
+      <Author>innovoCAD</Author>
+      <Description>Send Keyin.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCESendKeyin</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.MicroStation</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+        <Import>
+          <Namespace>BM = Bentley.MstnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+      </Declarations>
+      <Code Language="vb" Kind="method body" Delimiter="$"><![CDATA[BM.Session.Instance.EnqueueKeyin("Keyin")]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

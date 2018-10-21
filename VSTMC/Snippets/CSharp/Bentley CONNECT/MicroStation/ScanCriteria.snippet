@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Keywords>
+        <Keyword>dgnFile;Open;Create</Keyword>
+      </Keywords>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>Scan Criteria</Title>
+      <Author>innovoCAD</Author>
+      <Description>Access elements that match definable criteria from a DgnModel.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>MSCEScanCriteria</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>BDPN = Bentley.DgnPlatformNET</Namespace>
+        </Import>
+      </Imports>
+      <References>
+        <Reference>
+          <Assembly>Bentley.DgnPlatformNET</Assembly>
+        </Reference>
+      </References>
+      <Declarations>
+      </Declarations>
+      <Code Language="csharp" Kind="method body" Delimiter="$"><![CDATA[
+//Access elements that match definable criteria from a DgnModel. Use with Element Processor (MSCEElementProcessor Method) and ScanCriteriaExtension.cs project item.
+BDPN.ScanCriteria scanCriteria = new BDPN.ScanCriteria();
+scanCriteria.SetDrawnElements();
+scanCriteria.SetModelRef(dgnModel);
+BDPN.MSElementType[] msElementTypes = new BDPN.MSElementType[]
+    { BDPN.MSElementType.Line };
+
+/// <remarks>Call the extension method defined in ScanCriteriaExtensions.cs</remarks>
+scanCriteria.AddElementTypes(msElementTypes);
+scanCriteria.Scan(ElementProcessor);]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,40 @@
+﻿<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>MicroStation Wpf Application</Name>
+    <Description>Windows Presentation Foundation client application with MicroStation CONNECT Edition.</Description>
+    <Icon Package="{b3bae735-386c-4030-8329-ef48eeda4036}" ID="4583" />
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <ProjectType>VisualBasic</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <TemplateID>9b7e6ffc-1d6d-44ce-b710-4ad1d3fcf4a6</TemplateID>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>MSCEWpfApplication</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <PromptForSaveOnCreation>false</PromptForSaveOnCreation>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>false</CreateInPlace>
+    <AppIdFilter>blend</AppIdFilter>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.vbproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\AssemblyInfo.vb">AssemblyInfo.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\Resources.resx">Resources.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\Resources.Designer.vb">Resources.Designer.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\Settings.settings">Settings.settings</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\Settings.Designer.vb">Settings.Designer.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="My Project\MyExtensions\MyWpfExtension.vb">MyWpfExtension.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="false" SubType="Code" OpenOrder="20">MainWindow.xaml.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" OpenOrder="10">MainWindow.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true">Application.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" SubType="Code">Application.xaml.vb</ProjectItem>
+      <ProjectItem ReplaceParameters="true">App.config</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

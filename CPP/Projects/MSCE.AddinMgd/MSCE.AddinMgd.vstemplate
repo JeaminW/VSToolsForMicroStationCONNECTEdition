@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>MicroStation Managed</Name>
+    <Description>MicroStation CONNECT Edition Managed/CLR without Key-ins.</Description>
+    <Icon>__TemplateIcon.ico</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+    <ProjectType>VC</ProjectType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>e79cfdee-ac65-4558-9435-ab5d690c38c3</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>MSCEApp</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <Hidden>false</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cpp">AssemblyInfo.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" TargetFileName="$safeprojectname$.cpp">MSManaged.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.h">MSManaged.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.vcxproj.filters">ProjectTemplate.vcxproj.filters</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="stdafx.h">stdafx.h</ProjectItem>
+    </Project>
+    <CustomParameters>
+      <CustomParameter Name="$language$" Value="VC"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

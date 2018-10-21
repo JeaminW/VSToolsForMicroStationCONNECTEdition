@@ -1,0 +1,94 @@
+﻿#--------------------------------------------------------------------------------------
+#
+#     $Source: MstnExamples/Annotations/incrementTextTool/incrementText.mke $
+#
+#  $Copyright: (c) 2015 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+
+PolicyFile = MicroStationPolicy.mki
+appName         = $projectAppName$
+sAppName        = $projectsAppName$
+
+baseDir         = $(_MakeFilePath)
+privateInc      = $(baseDir)
+langSpec        = $(baseDir)english/
+mdlLibs         = $(MSMDE)library/
+
+%include mdl.mki
+
+#----------------------------------------------------------------------
+# Create needed output directories if they don't exist
+#----------------------------------------------------------------------
+always:
+    ~mkdir $(o)
+    ~mkdir $(rscObjects)
+    ~mkdir $(mdlapps)
+
+# Search in $(o) for command table resources
+dirToSearch = $(o)
+%include cincapnd.mki
+
+
+appObjects = $(o)$(appName)$(oext)
+
+appRscs = \
+			$(rscObjects)$(sAppName)cmd.rsc
+
+#--------------------------------------------
+#       Create command table and header file
+#--------------------------------------------
+$(o)$(sAppName)cmd.h                : $(baseDir)$(sAppName)cmd.r
+
+$(rscObjects)$(sAppName)cmd.rsc     : $(baseDir)$(sAppName)cmd.r
+
+#----------------------------------------------------------------------
+#       The following section generates the MDL Intermediate module. This
+#       module contains any non-translatable resource modules.
+#
+#       NOTE: This module MUST be placed in the directory pointed to by
+#         the 'o' macro defined in MDL.MKI. This module is
+#         shipped as part of the Foreign Language Translation Kit.
+#----------------------------------------------------------------------
+$(o)$(appName).mi    : $(appRscs)
+        $(msg)
+        > $(o)make.opt
+        -o$@
+        $(appRscs)
+        <
+        $(RLibCmd) @$(o)make.opt
+        ~time
+
+maRscs = \
+    $(o)$(appName).mi \
+    $(rscObjects)$(sAppName)msg.rsc
+
+#----------------------------------------------------------------------
+#       The following section builds any translatable resource modules for
+#   the application.
+#----------------------------------------------------------------------
+$(rscObjects)$(sAppName)msg.rsc     : $(basedir)english\$(sAppName)msg.r \
+                                      $(basedir)$(sAppName)Ids.h
+
+#----------------------------------------------------------------------
+# Link the MA
+#----------------------------------------------------------------------
+MA_NAME         = $(appName)
+MA_DEST         = $(DLM_DEST)
+MA_RSC_FILES    = $(maRscs)
+MA_EXT          = .ma
+
+cmdFile = $(o)$(MA_NAME)link.cmd
+
+#--------------------------------------------------------------------------------------
+#  Link and sign the MA
+#--------------------------------------------------------------------------------------
+"$(MA_DEST)$(MA_NAME)$(MA_EXT)"     : $(MA_RSC_FILES)
+    $(msg)
+    > $(cmdFile)
+    -o$@
+    $(MA_SPECIAL_LINKOPT)
+    $(MA_RSC_FILES)
+    <
+    $(RLibCmd) @$(cmdFile)
+    ~time

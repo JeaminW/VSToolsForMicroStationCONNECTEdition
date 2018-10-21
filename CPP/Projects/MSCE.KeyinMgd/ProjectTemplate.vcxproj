@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="$ToolVersion$" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>$guid1$</ProjectGuid>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <ProjectName>$safeprojectname$</ProjectName>
+    <TargetFrameworkVersion>v$targetframeworkversion$</TargetFrameworkVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>$platformtoolset$</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>$platformtoolset$</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(MSCEMdlappsPath)</OutDir>
+    <IntDir>Debug\</IntDir>
+    <ReferencePath>$(MSCE_ReferencePaths_x64);$(ReferencePath)</ReferencePath>
+    <LinkIncremental>false</LinkIncremental>
+    <LocalDebuggerCommand>$(MSCEPath)$(MSCEBentleyApp)</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments></LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <IncludePath>$(MSCE_IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(MSCE_LibraryPath);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(MSCEMdlappsPath)</OutDir>
+    <IntDir>Release\</IntDir>
+    <ReferencePath>$(MSCE_ReferencePaths_x64);$(ReferencePath)</ReferencePath>
+    <LinkIncremental>false</LinkIncremental>
+    <LocalDebuggerCommand>$(MSCEPath)$(MSCEBentleyApp)</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments></LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <IncludePath>$(MSCE_IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(MSCE_LibraryPath);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(MSCE_IncludePath);$(IntDir)objects</AdditionalIncludeDirectories>
+      <AdditionalOptions>/favor:blend /EHc /c /Zo %(AdditionalOptions)</AdditionalOptions>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProfileGuidedDatabase>bin\debug\$(TargetName).pgd</ProfileGuidedDatabase>
+      <TargetMachine>MachineX64</TargetMachine>
+      <ManifestFile>bin\debug\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
+      <ImportLibrary>bin\debug\$(TargetName).lib</ImportLibrary>
+      <ProgramDatabaseFile>$(MSCEMdlappsPath)$(TargetName).pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>$(MSCE_LibraryPath)</AdditionalLibraryDirectories>
+      <EmbedManagedResourceFile>Commands.xml,CommandTable.xml;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <AdditionalDependencies>bentley.lib;BentleyAllocator.lib;mdlbltin.lib;RmgrTools.lib;BentleyGeom.lib;DgnPlatform.lib;dgnview.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions />
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(MSCE_IncludePath);$(IntDir)objects</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ProfileGuidedDatabase>bin\debug\$(TargetName).pgd</ProfileGuidedDatabase>
+      <TargetMachine>MachineX64</TargetMachine>
+      <ManifestFile>bin\debug\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
+      <ImportLibrary>bin\debug\$(TargetName).lib</ImportLibrary>
+      <ProgramDatabaseFile>$(MSCEMdlappsPath)$(TargetName).pdb</ProgramDatabaseFile>
+      <AdditionalLibraryDirectories>$(MSCE_LibraryPath)</AdditionalLibraryDirectories>
+      <EmbedManagedResourceFile>Commands.xml,CommandTable.xml;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <AdditionalDependencies>bentley.lib;BentleyAllocator.lib;mdlbltin.lib;RmgrTools.lib;BentleyGeom.lib;DgnPlatform.lib;dgnview.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <Reference>
+      <Private>False</Private>
+    </Reference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="KeyinCommands.cpp" />
+    <ClCompile Include="$safeprojectname$.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$safeprojectname$.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Commands.xml"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Bentley.DgnDisplayNet">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.DgnPlatformNET">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.General.1.0">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.GeometryNET">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.MicroStation.Interfaces.1.0">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.MicroStation.WPF">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include ="Bentley.Windowing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include ="ustation">
+      <Private>False</Private>
+    </Reference>
+    $reference$
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

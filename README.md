@@ -1,4 +1,4 @@
-# VSToolsForMicroStationCONNECTEdition
+# Visual Studio Tools for MicroStation CONNECT Edition
 ## Seamlessly Integrations of Visual Studio and MicroStation - A more reliable, productive, robust and a simply more enjoyable development experience.
 
 #### Supported Bentley Products

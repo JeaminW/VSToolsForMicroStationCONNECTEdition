@@ -47,7 +47,7 @@ Please visit **[Bentley Systems](https://www.bentley.com)** for additional infor
 The .NET Framework and Visual Studio requirements is dependent on the supported Bentley product and version. The following table shows supported
 Bentley products .NET Framework requirements. The following table may not be exhaustive. Please contact [info@innofocad.com](mailto:info@innovocad.com)
 for corrections, errors, or omissions.
-
+dd
 | Product | Start Version | To Version | .NET Framework |
 | ------ | ----------- |-------------|-------------|-------------|
 | **AECOSim Building Designer** | 10.00.00.92 | 10.00.00.118 | 4.5.2

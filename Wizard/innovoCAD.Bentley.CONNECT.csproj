@@ -136,7 +136,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EmbeddedResources\BentleyBuild.bat" />
+    <EmbeddedResource Include="EmbeddedResources\ExampleBatchFiles\AECOsimBuild.bat" />
+    <EmbeddedResource Include="EmbeddedResources\ExampleBatchFiles\MSCEBuild.bat" />
+    <EmbeddedResource Include="EmbeddedResources\ExampleBatchFiles\ORDBuild.bat" />
     <None Include="Key.pfx" />
     <None Include="packages.config" />
   </ItemGroup>

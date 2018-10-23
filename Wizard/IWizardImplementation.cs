@@ -279,7 +279,6 @@ namespace innovoCAD.Bentley.CONNECT
             {
                 // If it fails (does not exist/contains files/read-only), let the directory stay.
             }
-            dd
         }
 
         /// <summary>

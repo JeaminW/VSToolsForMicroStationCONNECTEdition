@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
 using System.Collections;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace VSTMC
 {
@@ -33,6 +27,9 @@ namespace VSTMC
 
         #endregion
 
+        /// <summary>
+        ///
+        /// </summary>
         public void Initialize()
         {
             tbMSCEPath.Text = msceOptionsPage.MSCEPath;
@@ -377,6 +374,9 @@ namespace VSTMC
 
         #region Methods
 
+        /// <summary>
+        ///
+        /// </summary>
         private void SetMSCEComboBox()
         {
             cboBentleyProduct.Items.Clear();
@@ -396,6 +396,13 @@ namespace VSTMC
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="environment"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private string getFolderPath(string title, System.Environment.SpecialFolder environment, string path)
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
@@ -411,6 +418,11 @@ namespace VSTMC
             return path;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="textBox"></param>
+        /// <returns></returns>
         private string getFilePath(TextBox textBox)
         {
             Stream myStream = null;
@@ -448,6 +460,11 @@ namespace VSTMC
             return textBox.Text;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="textbox"></param>
+        /// <returns></returns>
         private bool PathExist(TextBox textbox)
         {
             if (!string.IsNullOrEmpty(textbox.Text))
@@ -474,6 +491,11 @@ namespace VSTMC
             return false;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="textbox"></param>
+        /// <returns></returns>
         private bool isFileExist(TextBox textbox)
         {
             if (!string.IsNullOrEmpty(textbox.Text))
@@ -500,6 +522,9 @@ namespace VSTMC
             return false;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void SetMDLPadlockImage()
         {
             if (msceOptionsPage.MDLAPPSLock)
@@ -518,6 +543,9 @@ namespace VSTMC
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void SetBatchPadlockImage()
         {
             if (msceOptionsPage.BatchLock)

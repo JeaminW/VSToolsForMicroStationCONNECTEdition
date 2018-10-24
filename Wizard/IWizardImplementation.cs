@@ -1,16 +1,10 @@
 ﻿using EnvDTE;
-using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TemplateWizard;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 
 [assembly: CLSCompliant(true)]
@@ -150,11 +144,18 @@ namespace innovoCAD.Bentley.CONNECT
 
         #region Helper Methods
 
+        /// <summary>
+        ///
+        /// </summary>
         private void ProcessNewItem()
         {
             ProcessProjectItemTemplates();
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="projectFileName"></param>
         private void ProcessNewProject(string projectFileName)
         {
             if (projectFileName == "MSCE.Keyin.vstemplate" || projectFileName== "MSCE.Addin.vstemplate")
@@ -168,6 +169,9 @@ namespace innovoCAD.Bentley.CONNECT
             ReplacementsDictionary.Add("$reference$", GetReferences(projectFileName));
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void ProcessEmbeddedResource()
         {
             string[] embeddedResources = Assembly.GetAssembly(typeof(IWizardImplementation)).GetManifestResourceNames();
@@ -213,6 +217,11 @@ namespace innovoCAD.Bentley.CONNECT
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <returns></returns>
         private string GetSubstituteResult(string resource)
         {
             try
@@ -257,6 +266,9 @@ namespace innovoCAD.Bentley.CONNECT
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void DeleteSolution()
         {
             // Try to delete project file.
@@ -693,7 +705,9 @@ namespace innovoCAD.Bentley.CONNECT
             }
         }
 
-
+        /// <summary>
+        ///
+        /// </summary>
         public bool IsLanguageCS
         {
             get
@@ -702,6 +716,9 @@ namespace innovoCAD.Bentley.CONNECT
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public bool IsLanguageVB
         {
             get
@@ -710,6 +727,9 @@ namespace innovoCAD.Bentley.CONNECT
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public bool IsLanguageCPP
         {
             get
@@ -718,6 +738,9 @@ namespace innovoCAD.Bentley.CONNECT
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public bool IsLanguageVC
         {
             get
@@ -846,6 +869,11 @@ namespace innovoCAD.Bentley.CONNECT
             return "";
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="projectFileName"></param>
+        /// <returns></returns>
         public string GetReferences(string projectFileName)
         {
             string bentleyApp = BentleyApp;
@@ -961,79 +989,6 @@ namespace innovoCAD.Bentley.CONNECT
 
         }
 
-        public string GetAddinAssembly
-        {
-            get
-            {
-                //if (Item != "NoKey")
-                //{
-                //    if (Language == "VC")
-                //    {
-                //        if (Item.Contains("OpenRoads"))
-                //            return "Bentley::Civil::Roadway::Commands::Addin";
-                //        else
-                //            return "Bentley::MstnPlatformNET::AddIn";
-                //    }
-                //    else
-                //    {
-                //        if (Item.Contains("OpenRoads"))
-                //            return "BC.Addin";
-                //        else
-                //            return "BM.AddIn";
-                //    }
-                //}
-                //if (Language == "VC")
-                //{
-                //    return "Bentley::MstnPlatformNET";
-                //}
-                return "BM.AddIn";
-            }
-        }
-
-        public string GetAdditionalUsing
-        {
-            get
-            {
-                //if (Item != "NoKey")
-                //{
-                //    if (Language == "CSharp")
-                //    {
-                //        if (Item.Contains("OpenRoads"))
-                //        {
-                //            return "using BC = Bentley.Civil.RoadwayDesigner.Commands;";
-                //        }
-                //        else
-                //        {
-                //            return null;
-                //        }
-                //    }
-                //    else if (Language == "VisualBasic")
-                //    {
-                //        if (Item.Contains("OpenRoads"))
-                //        {
-                //            return "Imports BC = Bentley.Civil.RoadwayDesigner.Commands";
-                //        }
-                //        else
-                //        {
-                //            return null;
-                //        }
-                //    }
-                //    else if (Language == "VC")
-                //    {
-                //        if (Item.Contains("OpenRoads"))
-                //        {
-                //            return "#using <Bentley.Civil.RoadwayDesigner.Commands.4.0.dll>";
-                //        }
-                //        else
-                //        {
-                //            return null;
-                //        }
-                //    }
-                //}
-                return "";
-            }
-        }
-
         // Summary:
         //     Gets the active project.
         //
@@ -1094,32 +1049,10 @@ namespace innovoCAD.Bentley.CONNECT
         private bool IsAllowed { get; set; }
 
         /// <summary>
-        /// Get boolean value if project is CSharp or Visual Basic.
-        /// Returns true if CSharp or Visual Basic otherwise returns false.
-        /// Read only.
-        /// </summary>
-        private bool IsCSOrvbProject { get { return ActiveProjectGuid == CSharpProjectGuid || ActiveProjectGuid == VBProjectGuid; } }
-
-        /// <summary>
         /// Get boolean value to determine if project is a CSharp project.
         /// True if project is a CSharp project otherwise false.
         /// </summary>
         private bool IsCSProject { get { return ActiveProjectGuid == CSharpProjectGuid; } }
-
-        /// <summary>
-        /// Get boolean value to determine if project is a CPP project.
-        /// True if project is a CPP project otherwise false.
-        /// </summary>
-        private bool IsCPPProject
-        {
-            get
-            {
-                if (Language == "CPP")
-                    return true;
-                else
-                    return false;
-            }
-        }
 
         /// <summary>
         /// Get boolean value to determine if project is a VC Managed project.
@@ -1179,11 +1112,6 @@ namespace innovoCAD.Bentley.CONNECT
         }
 
         /// <summary>
-        /// Get or set registry key.
-        /// </summary>
-        private static RegistryKey Key { get; set; }
-
-        /// <summary>
         /// Get or set ReplacementsDictionary.
         /// </summary>
         public Dictionary<string, string> ReplacementsDictionary { get; set; }
@@ -1216,68 +1144,4 @@ namespace innovoCAD.Bentley.CONNECT
 
         #endregion
     }
-
-    public static class GetRegistry
-    {
-        public static string GetRegistryValue(string keyName, string valueName)
-        {
-            return (string)Microsoft.Win32.Registry.GetValue(keyName, valueName, null);
-        }
-
-        #region Properties
-        //private static Dictionary<object, object> BentleyProducts { get; set; }
-        private static RegistryKey LocalMachineRegistry { get; set; }
-        public static RegistryKey CurrentUser { get; set; }
-        private static RegistryKey Key { get; set; }
-        private static RegistryKey PropertyKey { get; set; }
-        private static string MostRecentVersionInstallLocation { get; set; }
-
-        public static void StoreEnvironmentValue(string subKey, string keyValue, string value)
-        {
-            using (Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(subKey, Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree))
-            {
-                try
-                {
-                    key.SetValue(keyValue, value, Microsoft.Win32.RegistryValueKind.String);
-                    string test = (string)key.GetValue(keyValue, "");
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-        }
-        #endregion
-    }
-
-    internal class NativeMethods
-    {
-        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern Int32 GetShortPathName(String path, StringBuilder shortPath, Int32 shortPathLength);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

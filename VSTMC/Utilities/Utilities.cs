@@ -17,48 +17,8 @@ namespace VSTMC
         #region Public Methods
 
         /// <summary>
-        /// Get property from option pages.
+        ///
         /// </summary>
-        /// <param name="main"></param>
-        /// <param name="sub"></param>
-        /// <param name="property"></param>
-        /// <returns></returns>
-        public string GetProperty(string main, string sub, string property)
-        {
-            ThreadHelper.ThrowIfNotOnUIThread();
-            EnvDTE.Properties properties = dte.get_Properties(main, sub);
-            return properties.Item(property).Value.ToString();
-        }
-
-        // Helper method to obtain DOS Short name, if drive is set use short path names
-        // else returns long path name.
-        public string GetShortPathName(String longPath)
-        {
-            if (longPath == null)
-                return null;
-
-            StringBuilder shortPath = new StringBuilder(longPath.Length + 1);
-            int n = NativeMethods.GetShortPathName(longPath, shortPath, shortPath.Capacity);
-            if (0 == n)
-            {
-                return longPath;
-            }
-
-            return shortPath.ToString();
-        }
-
-        /// <summary>
-        /// Get properties from option pages.
-        /// </summary>
-        /// <param name="main"></param>
-        /// <param name="sub"></param>
-        /// <returns></returns>
-        public EnvDTE.Properties GetProperties(string main, string sub)
-        {
-            ThreadHelper.ThrowIfNotOnUIThread();
-            return dte.get_Properties(main, sub);
-        }
-
         public void SearchBentleyForums()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
@@ -75,6 +35,10 @@ namespace VSTMC
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="package"></param>
         public void ImportNativeApps(Package package)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
@@ -498,11 +462,5 @@ namespace VSTMC
         private Package package { get; set; }
 
         #endregion
-    }
-
-    internal class NativeMethods
-    {
-        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern Int32 GetShortPathName(String path, StringBuilder shortPath, Int32 shortPathLength);
     }
 }

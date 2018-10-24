@@ -1,17 +1,9 @@
-﻿using EnvDTE;
-using Microsoft;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
+﻿using Microsoft.VisualStudio.Shell;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace VSTMC
 {
@@ -27,6 +19,9 @@ namespace VSTMC
     {
         #region Fields
 
+        /// <summary>
+        ///
+        /// </summary>
         private OptionsControlPage optionsControl;
 
         #endregion
@@ -75,21 +70,6 @@ namespace VSTMC
         [Category("Bentley")]
         [Description("MDLApps path lock")]
         public bool MDLAPPSLock { get; set; }
-
-        //static string _msceArguments = "";
-
-        //[Category("Bentley")]
-        //[DisplayName("MSCE Arguments")]
-        //[Description("MSCE Arguments")]
-        //public string MSCEArguments
-        //{
-        //    get { return _msceArguments; }
-        //    set
-        //    {
-        //        _msceArguments = value;
-        //        //OnPropertyChanged(new PropertyChangedEventArgs("MSCEArguments"));
-        //    }
-        //}
 
         #endregion
 

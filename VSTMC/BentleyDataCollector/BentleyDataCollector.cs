@@ -8,23 +8,12 @@ namespace VSTMC
 {
     public static class BentleyDataCollector
     {
-        #region Properties
-
-        public static SortedDictionary<string, string> BentleyProducts { get; set; }
-
-        public static string GetAssemblyPath
-        {
-            get
-            {
-                return Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-            }
-        }
-
-        public static bool DoRestart { get; set; }
-        #endregion
-
         #region  Method
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
         public static string MSCEPath()
         {
             RegistryKey localMachineRegistry = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
@@ -204,93 +193,11 @@ namespace VSTMC
 
         }
 
-        public static string Version(string microStationCONNECTPath)
-        {
-            foreach (var item in BentleyProducts)
-            {
-                if (item.Value == microStationCONNECTPath)
-                {
-                    return item.Key;
-                }
-            }
-            return "";
-        }
-
-        public static string ProjectWiseCONNECTSDKPath(string appString)
-        {
-            RegistryKey localMachineRegistry = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            RegistryKey key = localMachineRegistry.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products");
-            string displayName = null;
-            string displayVersion = null;
-            Version version = new Version("0.0.0.0");
-            Version mostRecentVersion = new Version("0.0.0.0");
-            string mostRecentVersionInstallLocation = "";
-            string mostRecentDisplayName = "";
-
-            foreach (var v in key.GetSubKeyNames())
-            {
-                try
-                {
-
-                    RegistryKey propertyKey = localMachineRegistry.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products\"
-                        + v + "\\InstallProperties");
-                    displayName = propertyKey.GetValue("DisplayName", "") as string;
-
-                    if (displayName != null && displayName.Contains(appString))
-                    {
-                        displayVersion = propertyKey.GetValue("DisplayVersion") as string;
-                        Version versionKey = new Version(displayVersion);
-
-                        if (versionKey >= version)
-                        {
-                            mostRecentVersion = versionKey;
-                            mostRecentDisplayName = displayName;
-                        }
-                        version = versionKey;
-                    }
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-            try
-            {
-                string minor = version.Minor.ToString().Trim();
-                if (minor.Length == 1)
-                    minor += "0";
-                string major = version.Major.ToString().Trim();
-                if (major.Length == 1)
-                    major = "0" + major;
-                string strVersion = major + "." + minor;
-
-                RegistryKey currentUserRegistry = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-                key = currentUserRegistry.OpenSubKey(@"Software\WOW6432Node\Bentley\ProjectWise SDK\" + strVersion);
-                mostRecentVersionInstallLocation = key.GetValue("PathName", "") as string;
-            }
-            catch (Exception)
-            {
-                mostRecentVersionInstallLocation = "Not Installed";
-            }
-            return mostRecentVersionInstallLocation;
-        }
-
-        public static void StoreEnvironmentValue(string subKey, string keyValue, string value)
-        {
-            using (Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(subKey, Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree))
-            {
-                try
-                {
-                    key.SetValue(keyValue, value, Microsoft.Win32.RegistryValueKind.String);
-                    string test = (string)key.GetValue(keyValue, "");
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-        }
-
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="microStationCONNECTPath"></param>
+        /// <returns></returns>
         public static string GetMdlappsPath(string microStationCONNECTPath)
         {
             if (microStationCONNECTPath == "Not Installed")
@@ -299,6 +206,11 @@ namespace VSTMC
             return microStationCONNECTPath + @"mdlapps\";
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="BentleyApp"></param>
+        /// <returns></returns>
         public static string BentleyBuildBatchFilePath(string BentleyApp)
         {
             if (BentleyApp.Contains("AECOsimBuildingDesigner"))
@@ -311,10 +223,14 @@ namespace VSTMC
                 return Environment.GetEnvironmentVariable("ProgramData") + @"\innovoCAD\Bentley\VisualStudioTools\MSCEBuild.bat";
         }
 
-        public static string GetRegistryValue(string keyName, string valueName)
-        {
-            return (string)Microsoft.Win32.Registry.GetValue(keyName, valueName, null);
-        }
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///
+        /// </summary>
+        public static SortedDictionary<string, string> BentleyProducts { get; set; }
 
         #endregion
     }

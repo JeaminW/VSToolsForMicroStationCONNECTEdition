@@ -113,15 +113,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="__TemplateIcon.ico" />
-    <Content Include="ModulVer.cpp" />
-    <Content Include="ModulVer.h" />
-    <Content Include="native.h" />
-    <Content Include="nativetxt.h" />
-    <Content Include="MicroStationUtilities.h" />
-    <Content Include="tstring_typedef.h" />
+    <None Include="ModulVer.cpp" />
+    <None Include="ModulVer.h" />
+    <None Include="native.h" />
+    <None Include="nativetxt.h" />
+    <None Include="MicroStationUtilities.h" />
+    <None Include="tstring_typedef.h" />
     <Content Include="__PreviewImage.png" />
     <None Include="MicroStationUtilities.cpp" />
-    <Content Include="std_collection_typedefs.h" />
+    <None Include="std_collection_typedefs.h" />
     <Content Include="transkit.xml" />
     <None Include="native.cpp" />
   </ItemGroup>

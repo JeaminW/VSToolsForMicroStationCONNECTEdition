@@ -22,7 +22,6 @@
       <ProjectItem ReplaceParameters="true" OpenInEditor="true" TargetFileName="$safeprojectname$.cpp">MSManaged.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.h">MSManaged.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="KeyinCommands.cpp">KeyinCommands.cpp</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="KeyinTree.rtf">KeyinTree.rtf</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Commands.xml">Commands.xml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="stdafx.h">stdafx.h</ProjectItem>
     </Project>

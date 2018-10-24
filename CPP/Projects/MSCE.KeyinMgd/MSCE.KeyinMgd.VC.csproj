@@ -94,9 +94,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KeyinTree.rtf">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="MSManaged.mke" />
     <None Include="ProjectTemplate.vcxproj">
       <SubType>Designer</SubType>
@@ -109,13 +106,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="__TemplateIcon.ico" />
-    <Content Include="AssemblyInfo.cpp" />
-    <Content Include="Commands.xml" />
-    <Content Include="KeyinCommands.cpp" />
-    <Content Include="MSManaged.cpp" />
-    <Content Include="MSManaged.h" />
-    <Content Include="ProjectTemplate.vcxproj.filters" />
-    <Content Include="stdafx.h" />
+    <None Include="AssemblyInfo.cpp" />
+    <None Include="Commands.xml" />
+    <None Include="KeyinCommands.cpp" />
+    <None Include="MSManaged.cpp" />
+    <None Include="MSManaged.h" />
+    <None Include="ProjectTemplate.vcxproj.filters" />
+    <None Include="stdafx.h" />
     <Content Include="__PreviewImage.png" />
   </ItemGroup>
   <ItemGroup>

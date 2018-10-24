@@ -158,8 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="4509.ico" />
-    <Content Include="index.html" />
-    <Content Include="stylesheet.css" />
     <Content Include="__PreviewImage.png" />
     <None Include="KeyinCommands.vb" />
     <Content Include="Commands.xml" />

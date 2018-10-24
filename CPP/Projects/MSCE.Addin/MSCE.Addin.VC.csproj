@@ -125,14 +125,12 @@
     <Content Include="ModulVer.cpp" />
     <Content Include="ModulVer.h" />
     <Content Include="std_collection_typedefs.h" />
-    <Content Include="stylesheet.css" />
     <Content Include="tstring_typedef.h" />
     <Content Include="__PreviewImage.png" />
     <VSTemplate Include="MSCE.Addin.vstemplate">
       <OutputSubPath>Bentley\MSCE</OutputSubPath>
     </VSTemplate>
     <None Include="MicroStationUtilities.cpp" />
-    <Content Include="index.html" />
     <Content Include="MicroStationUtilities.h" />
     <Content Include="native.h" />
   </ItemGroup>

@@ -138,8 +138,6 @@
     <None Include="Resources.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
-    <Content Include="stylesheet.css" />
     <Content Include="__PreviewImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

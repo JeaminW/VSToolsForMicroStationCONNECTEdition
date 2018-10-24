@@ -106,14 +106,12 @@
   <ItemGroup>
     <Content Include="__TemplateIcon.ico" />
     <Content Include="AssemblyInfo.cpp" />
-    <Content Include="index.html" />
     <Content Include="MSManaged.cpp" />
     <Content Include="MSManaged.h" />
     <Content Include="ProjectTemplate.vcxproj.filters" />
     <Content Include="ReadMe.txt" />
     <Content Include="Sample.txt" />
     <Content Include="stdafx.h" />
-    <Content Include="stylesheet.css" />
     <Content Include="__PreviewImage.png" />
   </ItemGroup>
   <ItemGroup>

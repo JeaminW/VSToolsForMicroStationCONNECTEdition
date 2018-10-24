@@ -113,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="__TemplateIcon.ico" />
-    <Content Include="index.html" />
     <Content Include="ModulVer.cpp" />
     <Content Include="ModulVer.h" />
     <Content Include="native.h" />
@@ -123,7 +122,6 @@
     <Content Include="__PreviewImage.png" />
     <None Include="MicroStationUtilities.cpp" />
     <Content Include="std_collection_typedefs.h" />
-    <Content Include="stylesheet.css" />
     <Content Include="transkit.xml" />
     <None Include="native.cpp" />
   </ItemGroup>

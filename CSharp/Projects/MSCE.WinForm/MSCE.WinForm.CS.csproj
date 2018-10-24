@@ -129,8 +129,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="4554.ico" />
-    <Content Include="index.html" />
-    <Content Include="stylesheet.css" />
     <Content Include="__PreviewImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

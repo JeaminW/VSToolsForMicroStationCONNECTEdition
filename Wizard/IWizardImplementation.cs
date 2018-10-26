@@ -108,9 +108,9 @@ namespace innovoCAD.Bentley.CONNECT
             Dte.Windows.Item(EnvDTE.Constants.vsext_wk_SProjectWindow).Activate();
             Dte.Windows.Item(EnvDTE.Constants.vsext_wk_SProjectWindow).Visible = true;
             if (IsNewItem)
-                ProcessNewItem();
+                ProcessProjectItem();
             else
-                ProcessNewProject(ProjectFileInfo.Name);
+                ProcessProject();
 
         }
 
@@ -145,32 +145,31 @@ namespace innovoCAD.Bentley.CONNECT
         #region Helper Methods
 
         /// <summary>
-        ///
+        /// Process project item.
         /// </summary>
-        private void ProcessNewItem()
+        private void ProcessProjectItem()
         {
             ProcessProjectItemTemplates();
         }
 
         /// <summary>
-        ///
+        /// Process project.
         /// </summary>
-        /// <param name="projectFileName"></param>
-        private void ProcessNewProject(string projectFileName)
+        private void ProcessProject()
         {
-            if (projectFileName == "MSCE.Keyin.vstemplate" || projectFileName== "MSCE.Addin.vstemplate")
+            if (ProjectFileInfo.Name == "MSCE.Keyin.vstemplate" || ProjectFileInfo.Name == "MSCE.Addin.vstemplate")
             {
                 ProcessEmbeddedResource();
             }
 
             ReplacementsDictionary.Add("$ToolVersion$", Version);
             ReplacementsDictionary.Add("$platformtoolset$", PlatFormToolSet);
-            ReplacementsDictionary.Add("$AddinAttribute$", GetAddinAttribute());
-            ReplacementsDictionary.Add("$reference$", GetReferences(projectFileName));
+            ReplacementsDictionary.Add("$AddinAttribute$", AddAddinAttribute());
+            ReplacementsDictionary.Add("$reference$", AddReferences());
         }
 
         /// <summary>
-        ///
+        /// Process embedded resources.
         /// </summary>
         private void ProcessEmbeddedResource()
         {
@@ -218,7 +217,7 @@ namespace innovoCAD.Bentley.CONNECT
         }
 
         /// <summary>
-        ///
+        /// Get substitution results.
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
@@ -243,58 +242,7 @@ namespace innovoCAD.Bentley.CONNECT
         }
 
         /// <summary>
-        /// Helper method to process BackOutException.
-        /// </summary>
-        private void BackOutException(int type)
-        {
-            try
-            {
-                throw new WizardBackoutException(BackoutError);
-            }
-            catch (WizardBackoutException ex)
-            {
-                //Display exception message to user.
-                MessageBox.Show(ex.Message, Properties.Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                DeleteSolution();
-
-                throw;
-            }
-            catch (Exception)
-            {
-                // Display other exception message.
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        private void DeleteSolution()
-        {
-            // Try to delete project file.
-            try
-            {
-                Directory.Delete(DestinationDirectory);
-            }
-            catch (Exception)
-            {
-                // If it fails (does not exist/contains files/read-only), let the directory stay.
-            }
-
-            // Try to delete solution folder. Should occur if no other projects exist in solution. This should stop incremental
-            // increase in solution name in New Project dialog box.
-            try
-            {
-                Directory.Delete(SolutionDirectory);
-            }
-            catch (Exception)
-            {
-                // If it fails (does not exist/contains files/read-only), let the directory stay.
-            }
-        }
-
-        /// <summary>
-        /// Helper method to add locate command, placement command, toolbar, winforms, and wpf function name to
+        /// Add locate command, placement command, toolbar, winforms, and wpf function name to
         /// KeyinCommands.cs or KeyinCommands.vb and commands.xml.
         /// </summary>
         private void AddCommand()
@@ -337,60 +285,60 @@ namespace innovoCAD.Bentley.CONNECT
                                 string keyinCommandFunctionCS = "";
                                 string keyinCommandFunctionVB = "";
                                 string keyinCommandFunctionCPP = "";
-                                switch (Item)
+                                switch (GetItemTypeFromTemplate)
                                 {
                                     case "MicroStation Selection Tool":
-                                        keyinCommandFunctionCS = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation Selection Tool Settings":
-                                        keyinCommandFunctionCS = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation Selection Tool Settings WPF":
-                                        keyinCommandFunctionCS = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation IPrimitive Tool Settings":
-                                        keyinCommandFunctionCS = FunctionCode(FunctionName, "tool", "Run(unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode(FunctionName, "tool", "Run(unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode(FunctionName, "tool", "Run(unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode(FunctionName, "tool", "Run(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation IPrimitive Tool Settings WPF":
-                                        keyinCommandFunctionCS = FunctionCode(FunctionName, "tool", "Run(unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode(FunctionName, "tool", "Run(unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode(FunctionName, "tool", "Run(unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode(FunctionName, "tool", "Run(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation Placement Tool":
-                                        keyinCommandFunctionCS = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation Placement Tool Settings":
-                                        keyinCommandFunctionCS = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation Placement Tool Settings WPF":
-                                        keyinCommandFunctionCS = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode2(FunctionName, "tool", "InstallNewInstance(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation Tool Settings WPF":
-                                        keyinCommandFunctionCS = FunctionCode(FunctionName, "tool", "ShowWindow(Program.Addin, unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode(FunctionName, "tool", "ShowWindow(Program.Addin, unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode(FunctionName, "tool", "ShowWindow(Program.Addin, unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode(FunctionName, "tool", "ShowWindow(Program.Addin, unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation Tool Settings":
-                                        keyinCommandFunctionCS = FunctionCode(FunctionName, "tool", "ShowForm(Program.Addin, unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode(FunctionName, "tool", "ShowForm(Program.Addin, unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode(FunctionName, "tool", "ShowForm(Program.Addin, unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode(FunctionName, "tool", "ShowForm(Program.Addin, unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation Toolbar WPF":
-                                        keyinCommandFunctionCS = FunctionCode(FunctionName, "toolbar", "ShowToolbar(unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode(FunctionName, "toolbar", "ShowToolbar(unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode(FunctionName, "toolbar", "ShowToolbar(unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode(FunctionName, "toolbar", "ShowToolbar(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation Windows Form":
-                                        keyinCommandFunctionCS = FunctionCode(FunctionName, "form", "ShowForm(unparsed)", Lang.CS);
+                                        keyinCommandFunctionCS = AddFunctionCode(FunctionName, "form", "ShowForm(unparsed)", ProjectLanguage.CS);
                                         keyinCommandFunctionCPP = FunctionName + "::ShowForm(Program::MSAddin);";
-                                        keyinCommandFunctionVB = FunctionCode(FunctionName, "form", "ShowForm(unparsed)", Lang.VB);
+                                        keyinCommandFunctionVB = AddFunctionCode(FunctionName, "form", "ShowForm(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation UserControl (WPF)":
-                                        keyinCommandFunctionCS = FunctionCode(FunctionName, "usercontrol", "ShowWindow(unparsed)", Lang.CS);
-                                        keyinCommandFunctionVB = FunctionCode(FunctionName, "usercontrol", "ShowWindow(unparsed)", Lang.VB);
+                                        keyinCommandFunctionCS = AddFunctionCode(FunctionName, "usercontrol", "ShowWindow(unparsed)", ProjectLanguage.CS);
+                                        keyinCommandFunctionVB = AddFunctionCode(FunctionName, "usercontrol", "ShowWindow(unparsed)", ProjectLanguage.VB);
                                         break;
                                     case "MicroStation Class":
                                         keyinCommandFunctionCS = FunctionName + " " + FunctionName.ToLower() + " = new " + FunctionName + "();";
@@ -415,25 +363,19 @@ namespace innovoCAD.Bentley.CONNECT
             }
         }
 
-        private enum Lang
-        {
-            CS,
-            VB
-        }
-
         /// <summary>
-        /// Get function code for MicroStation CONNECT Edition Iprimitive Tool, Windows Form and WPF Tool Settings and applications.
+        /// Add function code for MicroStation CONNECT Edition Iprimitive Tool, Windows Form and WPF Tool Settings and applications.
         /// </summary>
         /// <param name="functionName"></param>
         /// <param name="method"></param>
         /// <returns></returns>
-        private static string FunctionCode(string functionName, string obj, string method, Lang lang)
+        private static string AddFunctionCode(string functionName, string obj, string method, ProjectLanguage lang)
         {
             switch (lang)
             {
-                case Lang.CS:
+                case ProjectLanguage.CS:
                     return functionName + " " + obj + " = new " + functionName + "();\n" + obj + "." + method + ";";
-                case Lang.VB:
+                case ProjectLanguage.VB:
                     return "Dim " + obj + " As " + functionName + " = New " + functionName + "\n" + obj + "." + method;
                 default:
                     return functionName + " " + obj + " = new " + functionName + "();\n" + obj + "." + method + ";";
@@ -441,20 +383,20 @@ namespace innovoCAD.Bentley.CONNECT
         }
 
         /// <summary>
-        /// Get function code for MicroStation CONNECT Edition Selection and Placement Tool.
+        /// Add function code for MicroStation CONNECT Edition Selection and Placement Tool.
         /// </summary>
         /// <param name="functionName"></param>
         /// <param name="obj"></param>
         /// <param name="method"></param>
         /// <param name="lang"></param>
         /// <returns></returns>
-        private static string FunctionCode2(string functionName, string obj, string method, Lang lang)
+        private static string AddFunctionCode2(string functionName, string obj, string method, ProjectLanguage lang)
         {
             switch (lang)
             {
-                case Lang.CS:
+                case ProjectLanguage.CS:
                     return functionName + " " + obj + " = new " + functionName + "(0, 0);\n" + obj + "." + method + ";";
-                case Lang.VB:
+                case ProjectLanguage.VB:
                     return "Dim " + obj + " As " + functionName + " = New " + functionName + "(0, 0)\n" + obj + "." + method;
                 default:
                     return functionName + " " + obj + " = new " + functionName + "(0, 0);\n" + obj + "." + method + ";";
@@ -681,113 +623,15 @@ namespace innovoCAD.Bentley.CONNECT
             }
         }
 
-        #endregion
-
-        #region Properties
-
         /// <summary>
-        ///
-        /// </summary>
-        public string Language
-        {
-            get
-            {
-                if (ReplacementsDictionary.ContainsKey("$language$"))
-                {
-                    if (string.IsNullOrEmpty(ReplacementsDictionary["$language$"]))
-                    {
-                        return "Language not specified";
-                    }
-                    return ReplacementsDictionary["$language$"];
-                }
-                else
-                    return "Dictionary does not contain language";
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public bool IsLanguageCS
-        {
-            get
-            {
-                return Language == "CSharp";
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public bool IsLanguageVB
-        {
-            get
-            {
-                return Language == "VisualBasic";
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public bool IsLanguageCPP
-        {
-            get
-            {
-                return Language == "CPP";
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public bool IsLanguageVC
-        {
-            get
-            {
-                return Language == "VC";
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public string Item
-        {
-            get
-            {
-                if (ReplacementsDictionary.ContainsKey("$item$"))
-                {
-                    if (string.IsNullOrEmpty(ReplacementsDictionary["$item$"]))
-                    {
-                        return "Item description not specified";
-                    }
-                    return ReplacementsDictionary["$item$"];
-                }
-                else
-                    return "NoKey";
-            }
-        }
-
-        /// <summary>
-        /// Get or Set file information.
-        /// </summary>
-        public FileInfo ProjectFileInfo { get; set; }
-
-        /// <summary>
-        /// Get assembly Version.
-        /// </summary>
-        public string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Name.ToUpper() + " v" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-        /// <summary>
-        /// Get addin attribute.
+        /// Add addin attribute for project.
         /// </summary>
         /// <returns></returns>
-        private string GetAddinAttribute()
+        private string AddAddinAttribute()
         {
             string bentleyApp = BentleyApp;
             string safeprojectname = ReplacementsDictionary["$safeprojectname$"];
-            if (IsLanguageCS)
+            if (IsCSProject)
             {
                 if (bentleyApp.Contains("PowerDraft"))
                     return
@@ -808,7 +652,7 @@ namespace innovoCAD.Bentley.CONNECT
                         "\r\n/// </summary>" +
                         "\r\n[BM.AddIn(MdlTaskID = \"" + safeprojectname + "\")]";
             }
-            else if (IsLanguageVB)
+            else if (IsVBProject)
             {
                 if (bentleyApp.Contains("PowerDraft"))
                     return
@@ -829,7 +673,7 @@ namespace innovoCAD.Bentley.CONNECT
                         "\r\n''' </summary>" +
                         "\r\n<BM.AddIn(MdlTaskID:=\"" + safeprojectname + "\")>";
             }
-            else if (IsLanguageCPP)
+            else if (IsCPPProject)
             {
                 if (bentleyApp.Contains("PowerDraft"))
                     return
@@ -847,7 +691,7 @@ namespace innovoCAD.Bentley.CONNECT
                 else
                     return "";
             }
-            else if (IsLanguageVC)
+            else if (IsVCProject)
             {
                 if (bentleyApp.Contains("PowerDraft"))
                     return
@@ -870,16 +714,15 @@ namespace innovoCAD.Bentley.CONNECT
         }
 
         /// <summary>
-        ///
+        /// Add assembly references for specific Bentley product projects.
         /// </summary>
-        /// <param name="projectFileName"></param>
         /// <returns></returns>
-        public string GetReferences(string projectFileName)
+        public string AddReferences()
         {
             string bentleyApp = BentleyApp;
             if (bentleyApp.Contains("AECOsim"))
             {
-                if (projectFileName.Contains("Form") || projectFileName.Contains("WPF"))
+                if (ProjectFileInfo.Name.Contains("Form") || ProjectFileInfo.Name.Contains("WPF"))
                     return
                         "    <Reference Include=\"Bentley.Interop.TFCom\">\n\r" +
                         "      <Private>True</Private>\n\r" +
@@ -910,7 +753,7 @@ namespace innovoCAD.Bentley.CONNECT
             }
             else if (bentleyApp.Contains("OpenPlant"))
             {
-                return projectFileName.Contains("Form") || projectFileName.Contains("WPF")
+                return ProjectFileInfo.Name.Contains("Form") || ProjectFileInfo.Name.Contains("WPF")
                     ? "    <Reference Include=\"Bentley.OpenPlantModeler.SDK\">\n\r" +
                         "      <Private>True</Private>\n\r" +
                         "    </Reference>"
@@ -920,7 +763,7 @@ namespace innovoCAD.Bentley.CONNECT
             }
             else if (bentleyApp.Contains("OpenBridge"))
             {
-                return projectFileName.Contains("Form") || projectFileName.Contains("WPF")
+                return ProjectFileInfo.Name.Contains("Form") || ProjectFileInfo.Name.Contains("WPF")
                     ? "    <Reference Include=\"Bentley.ObmNET.Model\">\n\r" +
                         "      <Private>True</Private>\n\r" +
                         "    </Reference>"
@@ -930,7 +773,7 @@ namespace innovoCAD.Bentley.CONNECT
             }
             else if (bentleyApp.Contains("OpenRail"))
             {
-                return projectFileName.Contains("Form") || projectFileName.Contains("WPF")
+                return ProjectFileInfo.Name.Contains("Form") || ProjectFileInfo.Name.Contains("WPF")
                     ? "    <Reference Include=\"Bentley.Civil.Rail.GeometryModel\">\n\r" +
                         "      <Private>True</Private>\n\r" +
                         "    </Reference>\n\r" +
@@ -961,7 +804,7 @@ namespace innovoCAD.Bentley.CONNECT
             }
             else if (bentleyApp.Contains("OpenRoads"))
             {
-                return projectFileName.Contains("Form") || projectFileName.Contains("WPF")
+                return ProjectFileInfo.Name.Contains("Form") || ProjectFileInfo.Name.Contains("WPF")
                     ? "    <Reference Include=\"Bentley.CifNET.GeometryModel.SDK.4.0\">\n\r" +
                         "      <Private>True</Private>\n\r" +
                         "    </Reference>"
@@ -989,48 +832,72 @@ namespace innovoCAD.Bentley.CONNECT
 
         }
 
-        // Summary:
-        //     Gets the active project.
-        //
-        // Returns:
-        //     Returns the active project.
-        private Project ActiveProject { get { return (Project)ActiveSolutionProjects.GetValue(0); } }
+        #endregion
+        #region Properties
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
-        /// Get ActiveSolutionProjects. Read only.
+        /// Get language from template.
         /// </summary>
-        private Array ActiveSolutionProjects { get { return (Array)Dte.ActiveSolutionProjects; } }
-
-        /// <summary>
-        /// Get active project GUID. Read only.
-        /// </summary>
-        private Guid ActiveProjectGuid { get { return new Guid(ActiveProject.Kind); } }
-
-        /// <summary>
-        /// Get or Set BackoutWizardException String.
-        /// </summary>
-        private string BackoutError { get; set; }
-
-        /// <summary>
-        /// Get Bentley application. Read only.
-        /// </summary>
-        private string BentleyApp
+        public string GetLanguageFromTemplate
         {
             get
             {
-                return Dte.get_Properties("Bentley", "MicroStation CONNECT").Item("BentleyApp").Value.ToString();
+                if (ReplacementsDictionary.ContainsKey("$language$"))
+                {
+                    if (string.IsNullOrEmpty(ReplacementsDictionary["$language$"]))
+                    {
+                        return "Language not specified";
+                    }
+                    return ReplacementsDictionary["$language$"];
+                }
+                else
+                    return "Dictionary does not contain language";
             }
         }
 
         /// <summary>
-        /// Get CSharp GUID Id. Read only.
+        /// Get item type from project item template.
         /// </summary>
-        private Guid CSharpProjectGuid { get { return new Guid(VSLangProj.PrjKind.prjKindCSharpProject); } }
+        public string GetItemTypeFromTemplate
+        {
+            get
+            {
+                if (ReplacementsDictionary.ContainsKey("$item$"))
+                {
+                    if (string.IsNullOrEmpty(ReplacementsDictionary["$item$"]))
+                    {
+                        return "Item description not specified";
+                    }
+                    return ReplacementsDictionary["$item$"];
+                }
+                else
+                    return "NoKey";
+            }
+        }
 
         /// <summary>
-        /// Get DestinationDirectory. Read only.
+        /// Get or Set file information.
         /// </summary>
-        private string DestinationDirectory { get { return ReplacementsDictionary["$destinationdirectory$"]; } }
+        public FileInfo ProjectFileInfo { get; set; }
+
+        /// <summary>
+        /// Get the active project. (Read only)
+        /// </summary>
+        private Project ActiveProject => (Project)ActiveSolutionProjects.GetValue(0);
+
+        /// <summary>
+        /// Get ActiveSolutionProjects. (Read only)
+        /// </summary>
+        private Array ActiveSolutionProjects => (Array)Dte.ActiveSolutionProjects;
+
+        /// <summary>
+        /// Get Bentley application. (Read only)
+        /// </summary>
+        private string BentleyApp => Dte.get_Properties("Bentley", "MicroStation CONNECT").Item("BentleyApp").Value.ToString();
 
         /// <summary>
         /// Get or set Visual Studio environment DTE (EnvDTE.DTE).
@@ -1049,25 +916,22 @@ namespace innovoCAD.Bentley.CONNECT
         private bool IsAllowed { get; set; }
 
         /// <summary>
-        /// Get boolean value to determine if project is a CSharp project.
-        /// True if project is a CSharp project otherwise false.
+        /// Determine if the project is a CSharp project. Returns true if project is a CSharp Project
+        /// otherwise returns false. (Read only)
         /// </summary>
-        private bool IsCSProject { get { return ActiveProjectGuid == CSharpProjectGuid; } }
+        private bool IsCSProject => GetLanguageFromTemplate == "CSharp";
 
         /// <summary>
-        /// Get boolean value to determine if project is a VC Managed project.
-        /// True if project is a VC Managed project otherwise false.
+        /// Determine if the project is a CPP project. Returns true if project is a CPP Project
+        /// otherwise returns false. (Read only)
         /// </summary>
-        private bool IsVCProject
-        {
-            get
-            {
-                if (Language == "VC")
-                    return true;
-                else
-                    return false;
-            }
-        }
+        private bool IsCPPProject => GetLanguageFromTemplate == "CPP";
+
+        /// <summary>
+        /// Determine if the project is a managed CPP project. Returns true if project is a managed CPP Project
+        /// otherwise returns false. (Read only)
+        /// </summary>
+        private bool IsVCProject => GetLanguageFromTemplate == "VC";
 
         /// <summary>
         /// Get or set boolean value to determine if project item is added to keyins.
@@ -1082,13 +946,13 @@ namespace innovoCAD.Bentley.CONNECT
         private bool IsNewItem { get; set; }
 
         /// <summary>
-        /// Get boolean value to determine if project is a Visual Basic project.
-        /// True if project is a Visual Basic project otherwise false.
+        /// Determine if the project is a Visual Basic project. Returns true if project is a Visual Basic Project
+        /// otherwise returns false. (Read only)
         /// </summary>
-        private bool IsVBProject { get { return ActiveProjectGuid == VBProjectGuid; } }
+        private bool IsVBProject => GetLanguageFromTemplate == "VisualBasic";
 
         /// <summary>
-        /// Get platformtoolset. Read only.
+        /// Get platformtoolset. (Read only)
         /// </summary>
         private string PlatFormToolSet
         {
@@ -1117,29 +981,25 @@ namespace innovoCAD.Bentley.CONNECT
         public Dictionary<string, string> ReplacementsDictionary { get; set; }
 
         /// <summary>
-        /// Get RootNamespace. Read Only.
+        /// Get RootNamespace. (Read only)
         /// </summary>
-        public string RootNamespace { get { return ActiveProject.Properties.Item("DefaultNamespace").Value.ToString(); } }
+        public string RootNamespace => ActiveProject.Properties.Item("DefaultNamespace").Value.ToString();
 
         /// <summary>
-        /// Get SolutionDirectory. Read Only.
+        /// Get Version. (Read only)
         /// </summary>
-        private string SolutionDirectory { get { return ReplacementsDictionary["$solutiondirectory$"]; } }
+        private string Version => Dte.Version.ToString();
 
-        /// <summary>
-        /// Get Visual Basic GUID Id. Read only.
-        /// </summary>
-        private Guid VBProjectGuid { get { return new Guid(VSLangProj.PrjKind.prjKindVBProject); } }
+        #endregion
 
-        /// <summary>
-        /// Get Version. Read only.
-        /// </summary>
-        private string Version
+        #region Enumerations
+
+        private enum ProjectLanguage
         {
-            get
-            {
-                return Dte.Version.ToString();
-            }
+            CS,
+            VB,
+            CPP,
+            VC
         }
 
         #endregion

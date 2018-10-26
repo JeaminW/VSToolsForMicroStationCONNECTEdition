@@ -101,7 +101,7 @@ namespace innovoCAD.Bentley.CONNECT
 
             Dte = (DTE)ServiceProvider.GlobalProvider.GetService(typeof(DTE));
 
-            IsAllowed = true;
+            IsCommandsXmlAllowed = true;
             IsItemAddedToKeyins = false;
 
             //Activates and ensures Solution Explorer is visible.
@@ -149,7 +149,43 @@ namespace innovoCAD.Bentley.CONNECT
         /// </summary>
         private void ProcessProjectItem()
         {
-            ProcessProjectItemTemplates();
+            foreach (ProjectItem projectItem in ActiveProject.ProjectItems)
+            {
+                if (projectItem.Name.ToLower() == "commands.xml")
+                {
+                    if (ReplacementsDictionary["$safeitemname$"].ToLower().Contains("keyincommands"))
+                    {
+                        MessageBox.Show(Properties.Resources.CommandTableError, Properties.Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        IsCommandsXmlAllowed = false;
+                        break;
+                    }
+                    else
+                    {
+                        if (!ReplacementsDictionary["$safeitemname$"].ToLower().Contains("scancriteriaextensions"))
+                        {
+                            DialogResult response = MessageBox.Show(Properties.Resources.AddItem, Properties.Resources.AddItemMessageTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                            if (response == DialogResult.Yes)
+                            {
+                                IsItemAddedToKeyins = true;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            foreach (ProjectItem projectItem in ActiveProject.ProjectItems)
+            {
+                if (projectItem.Name.ToLower().Contains("scancriteriaextensions"))
+                {
+                    if (ReplacementsDictionary["$safeitemname$"].ToLower().Contains("scancriteriaextensions"))
+                    {
+                        MessageBox.Show(Properties.Resources.ScanCriteriaMsg, Properties.Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        IsCommandsXmlAllowed = false;
+                    }
+                    break;
+                }
+            }
         }
 
         /// <summary>
@@ -580,50 +616,6 @@ namespace innovoCAD.Bentley.CONNECT
         }
 
         /// <summary>
-        /// Helper method to process project items.
-        /// </summary>
-        private void ProcessProjectItemTemplates()
-        {
-            foreach (ProjectItem projectItem in ActiveProject.ProjectItems)
-            {
-                if (projectItem.Name.ToLower() == "commands.xml")
-                {
-                    if (ReplacementsDictionary["$safeitemname$"].ToLower().Contains("keyincommands"))
-                    {
-                        MessageBox.Show(Properties.Resources.CommandTableError, Properties.Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        IsAllowed = false;
-                        break;
-                    }
-                    else
-                    {
-                        if (!ReplacementsDictionary["$safeitemname$"].ToLower().Contains("scancriteriaextensions"))
-                        {
-                            DialogResult response = MessageBox.Show(Properties.Resources.AddItem, Properties.Resources.AddItemMessageTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-                            if (response == DialogResult.Yes)
-                            {
-                                IsItemAddedToKeyins = true;
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-
-            foreach (ProjectItem projectItem in ActiveProject.ProjectItems)
-            {
-                if (projectItem.Name.ToLower().Contains("scancriteriaextensions"))
-                {
-                    if (ReplacementsDictionary["$safeitemname$"].ToLower().Contains("scancriteriaextensions"))
-                    {
-                        MessageBox.Show(Properties.Resources.ScanCriteriaMsg, Properties.Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        IsAllowed = false;
-                    }
-                    break;
-                }
-            }
-        }
-
-        /// <summary>
         /// Add addin attribute for project.
         /// </summary>
         /// <returns></returns>
@@ -880,7 +872,7 @@ namespace innovoCAD.Bentley.CONNECT
         }
 
         /// <summary>
-        /// Get or Set file information.
+        /// Get or Set project file information.
         /// </summary>
         public FileInfo ProjectFileInfo { get; set; }
 
@@ -910,10 +902,10 @@ namespace innovoCAD.Bentley.CONNECT
         private string FunctionName { get; set; }
 
         /// <summary>
-        /// Get or set boolean value to determine if Commands.xml is allowed.
-        /// Allow commands.xml if true otherwise do not allow commands.xml.
+        /// Determine if Commands.xml is allowed. Allow commands.xml if true
+        /// otherwise do not allow commands.xml.
         /// </summary>
-        private bool IsAllowed { get; set; }
+        private bool IsCommandsXmlAllowed { get; set; }
 
         /// <summary>
         /// Determine if the project is a CSharp project. Returns true if project is a CSharp Project

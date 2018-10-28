@@ -36,7 +36,7 @@
     </CustomParameters>
   </TemplateContent>
   <WizardExtension>
-    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.0.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.1.0, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
     <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
   </WizardExtension>
 </VSTemplate>

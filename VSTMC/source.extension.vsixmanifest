@@ -3,14 +3,14 @@
     <Metadata>
         <Identity Id="VSTMC.4a7873f1-a18c-43bd-ad5e-cd67ed280ac1" Version="5.0.1.1" Language="en-US" Publisher="innovoCAD" />
         <DisplayName>VS Tools for MicroStation CONNECT Edition</DisplayName>
-        <Description xml:space="preserve">Templates and tools for MicroStation CONNECT Edition.</Description>
+        <Description xml:space="preserve">Visual Studio Tools and Templates for MicroStation CONNECT Edition, AECOsim Building Designer CONNECT Edition, OpenRoads Designer CONNECT Edition and more...</Description>
         <MoreInfo>https://marketplace.visualstudio.com/items?itemName=vs-publisher-542131.VSToolsForMicroStationCONNECTEdition</MoreInfo>
         <License>Resources\eula.rtf</License>
         <GettingStartedGuide>https://marketplace.visualstudio.com/items?itemName=vs-publisher-542131.VSToolsForMicroStationCONNECTEdition</GettingStartedGuide>
         <ReleaseNotes>Resources\ReleaseNotes.rtf</ReleaseNotes>
         <Icon>Resources\Logo.ico</Icon>
         <PreviewImage>Resources\__PreviewImage.png</PreviewImage>
-        <Tags>Bentley,MicroStation,MicroStation CONNECT Edition,C#,CSharp,VB .NET,VB,Visual Basic,BDN, Visual Studio</Tags>
+        <Tags>Bentley,MicroStation,MicroStation CONNECT Edition,C#,CSharp,VB .NET,VB,Visual Basic,BDN, Visual Studio, AECOsim, Building, Designer, OpenRoads. OpenRail, OpenUtilities, Map</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0, 17.0)" />

@@ -19,9 +19,6 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.vcxproj.filters">ProjectTemplate.vcxproj.filters</ProjectItem>
       <ProjectItem ReplaceParameters="true" OpenInEditor="true" TargetFileName="$safeprojectname$.cpp">native.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.h">native.h</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Declare_ustnTaskId_Import.h">Declare_ustnTaskId_Import.h</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="std_collection_typedefs.h">std_collection_typedefs.h</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="tstring_typedef.h">tstring_typedef.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.mke">native.mke</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.r">native.r</ProjectItem>
       <ProjectItem ReplaceParameters="true">MicroStationUtilities.cpp</ProjectItem>
@@ -34,7 +31,7 @@
     </CustomParameters>
   </TemplateContent>
   <WizardExtension>
-    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.1.0, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
+    <Assembly>innovoCAD.Bentley.CONNECT, Version=5.0.1.1, Culture=neutral, PublicKeyToken=c70015a49b993e4f</Assembly>
     <FullClassName>innovoCAD.Bentley.CONNECT.IWizardImplementation</FullClassName>
   </WizardExtension>
 </VSTemplate>

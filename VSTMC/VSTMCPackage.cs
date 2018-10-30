@@ -28,7 +28,7 @@ namespace VSTMC
     /// </para>
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [InstalledProductRegistration("#110", "#112", "5.0.1.0", IconResourceID = 400)] // Info on this package for Help/About
+    [InstalledProductRegistration("#110", "#112", "5.0.1.1", IconResourceID = 400)] // Info on this package for Help/About
     [Guid(PackageGuids.guidPackageString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideOptionPage(typeof(OptionsPage), "Bentley", "MicroStation CONNECT", 100, 102, true, new string[] { "Bentley Developer Network - Bentley CONNECT Edition" })]
@@ -148,6 +148,8 @@ namespace VSTMC
                         msceInclude += ";" + SDKPath + "Objects";
                     }
 
+                    msceInclude += ";" + GetAssemblyPath + "\\include";
+
                     Environment.SetEnvironmentVariable("MSCE_IncludePath", msceInclude, EnvironmentVariableTarget.Process);
 
                     #endregion
@@ -209,8 +211,24 @@ namespace VSTMC
 
                     Environment.SetEnvironmentVariable("MSCE_ReferencePaths_x64", msceReferencePaths, EnvironmentVariableTarget.Process);
 
+                    Environment.SetEnvironmentVariable("MSCE_Dependencies",
+                            "bentley.lib;BentleyAllocator.lib;mdlbltin.lib;RmgrTools.lib;BentleyGeom.lib;DgnPlatform.lib;dgnview.lib",
+                            EnvironmentVariableTarget.Process);
+
+                    Environment.SetEnvironmentVariable("MSCE_PreprocessorDefinitions",
+                        "BENTLEY_WARNINGS_HIGHEST_LEVEL;WIN32;winNT;__EXCEPTIONS;_VISCXX;_CONVERSION_DONT_USE_THREAD_LOCALE;_SECURE_SCL=0;WIN32_LEAN_AND_MEAN;NTDDI_WIN7SP1=0x06010100",
+                        EnvironmentVariableTarget.Process);
+
                     #endregion
                 }
+            }
+        }
+
+        public string GetAssemblyPath
+        {
+            get
+            {
+                return Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
             }
         }
 

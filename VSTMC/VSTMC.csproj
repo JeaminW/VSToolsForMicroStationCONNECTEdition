@@ -103,6 +103,15 @@
     <Compile Include="VSTMCPackage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="include\Declare_ustnTaskId_Import.h">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="include\std_collection_typedefs.h">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="include\tstring_typedef.h">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\eula.rtf">
       <IncludeInVSIX>true</IncludeInVSIX>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

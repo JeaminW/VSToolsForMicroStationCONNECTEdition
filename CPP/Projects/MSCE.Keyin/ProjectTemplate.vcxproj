@@ -141,9 +141,6 @@
     <ClInclude Include="$safeprojectname$.h" />
     <ClCompile Include="MicroStationUtilities.cpp" />
     <ClInclude Include="MicroStationUtilities.h" />
-    <ClInclude Include="Declare_ustnTaskId_Import.h" />
-    <ClInclude Include="std_collection_typedefs.h" />
-    <ClInclude Include="tstring_typedef.h" />
     <ClCompile Include="ModulVer.cpp" />
     <ClInclude Include="ModulVer.h" />
     <None Include="$safeprojectname$.mke" />

@@ -6,7 +6,7 @@
         <Description xml:space="preserve">Templates and tools for MicroStation CONNECT Edition.</Description>
         <MoreInfo>https://marketplace.visualstudio.com/items?itemName=vs-publisher-542131.VSToolsForMicroStationCONNECTEdition</MoreInfo>
         <License>Resources\eula.rtf</License>
-        <GettingStartedGuide>Resources\GettingStarted.rtf</GettingStartedGuide>
+        <GettingStartedGuide>https://marketplace.visualstudio.com/items?itemName=vs-publisher-542131.VSToolsForMicroStationCONNECTEdition</GettingStartedGuide>
         <ReleaseNotes>Resources\ReleaseNotes.rtf</ReleaseNotes>
         <Icon>Resources\Logo.ico</Icon>
         <PreviewImage>Resources\__PreviewImage.png</PreviewImage>

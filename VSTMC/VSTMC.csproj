@@ -100,6 +100,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VSPackage.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tools\VSTMCHelpCommand.cs" />
     <Compile Include="VSTMCPackage.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +132,9 @@
     <None Include="ExampleBatchFiles\AECOsimBuild.bat" />
     <None Include="ExampleBatchFiles\MSCEBuild.bat" />
     <None Include="ExampleBatchFiles\ORDBuild.bat" />
+    <Content Include="Help\Visual Studio Tools for MicroStation CONNECT Edition.chm">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="Key.snk" />
     <None Include="Resources\KeyinTree.xsd">
       <SubType>Designer</SubType>

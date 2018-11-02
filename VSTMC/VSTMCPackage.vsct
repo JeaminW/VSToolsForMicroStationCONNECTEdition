@@ -47,6 +47,10 @@
       <Group guid="guidVSTMCPackageCmdSet" id="PrjCtxtMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE" />
       </Group>
+
+      <Group guid="guidVSTMCPackageCmdSet" id="HelpGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_HELP" />
+      </Group>
     </Groups>
 
     <!--Buttons section. -->
@@ -106,6 +110,13 @@
           <ButtonText>Open Bentley SDK Folder in File Explorer</ButtonText>
         </Strings>
       </Button>
+      <Button guid="guidVSTMCPackageCmdSet" id="cmdidVSTMCHelpCommand" priority="0x0100" type="Button">
+        <Parent guid="guidVSTMCPackageCmdSet" id="HelpGroup" />
+        <Icon guid="guidImages" id="HelpPic" />
+        <Strings>
+          <ButtonText>Visual Studio Tools for MicroStation CONNECT Edition Help</ButtonText>
+        </Strings>
+      </Button>
     </Buttons>
 
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
@@ -115,7 +126,7 @@
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="guidImages" href="Resources\ImageStrip.png" usedList="BentleyPic, FolderOpenPic, SearchPic, DeletePic, AlignmentPic, StrikethroughPic, ImportPic, MSCEPic, ORDPic" />
+      <Bitmap guid="guidImages" href="Resources\ImageStrip.png" usedList="BentleyPic, FolderOpenPic, SearchPic, DeletePic, AlignmentPic, StrikethroughPic, ImportPic, MSCEPic, ORDPic, HelpPic" />
     </Bitmaps>
   </Commands>
 
@@ -126,6 +137,7 @@
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidVSTMCPackageCmdSet" value="{438120cb-7081-4b71-bac5-ccd58b950c38}">
       <IDSymbol name="MenuGroup" value="0x1020" />
+      <IDSymbol name="HelpGroup" value="0x1080" />
       <IDSymbol name="EditorCtxtMenuGroup" value="0x1040" />
       <IDSymbol name="PrjCtxtMenuGroup" value="0x1060" />
       <IDSymbol name="cmdidNativeImportCommand" value="0x0100" />
@@ -133,6 +145,7 @@
       <IDSymbol name="cmdidOpenMdlAppsFolderCommand" value="4130" />
       <IDSymbol name="cmdidSearchBentleyForumsCommand" value="4131" />
       <IDSymbol name="cmdidOpenSDKFolderCommand" value="4193" />
+      <IDSymbol name="cmdidVSTMCHelpCommand" value="4194" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{bc6230d7-3069-45c9-abeb-9e9696245513}">
@@ -145,6 +158,7 @@
       <IDSymbol name="ImportPic" value="7" />
       <IDSymbol name="MSCEPic" value="8" />
       <IDSymbol name="ORDPic" value="9" />
+      <IDSymbol name="HelpPic" value="10" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

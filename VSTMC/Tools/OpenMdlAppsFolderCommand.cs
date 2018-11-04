@@ -56,8 +56,7 @@ namespace VSTMC
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             OleMenuCommand menuCommand = sender as OleMenuCommand;
-            Utilities utilities = new Utilities();
-            menuCommand.Visible = utilities.IsCONNECTProject;
+            menuCommand.Visible = Utilities.IsCONNECTProject;
         }
 
         /// <summary>

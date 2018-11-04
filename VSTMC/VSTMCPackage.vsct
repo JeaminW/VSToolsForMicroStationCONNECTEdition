@@ -118,6 +118,16 @@
           <ButtonText>Visual Studio Tools for MicroStation CONNECT Edition Help</ButtonText>
         </Strings>
       </Button>
+
+      <Button guid="guidVSTMCPackageCmdSet" id="cmdidAddKeyinTreeSchemaCommand" priority="0x0100" type="Button">
+        <Parent guid="guidVSTMCPackageCmdSet" id="EditorCtxtMenuGroup" />
+        <Icon guid="guidImages" id="SchemaPic" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Add Bentley KeyinTree Schema</ButtonText>
+        </Strings>
+      </Button>
+
     </Buttons>
 
     <Combos>
@@ -142,7 +152,7 @@
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="guidImages" href="Resources\ImageStrip.png" usedList="BentleyPic, FolderOpenPic, SearchPic, DeletePic, AlignmentPic, StrikethroughPic, ImportPic, MSCEPic, ORDPic, HelpPic" />
+      <Bitmap guid="guidImages" href="Resources\ImageStrip.png" usedList="BentleyPic, FolderOpenPic, SearchPic, DeletePic, AlignmentPic, StrikethroughPic, ImportPic, MSCEPic, ORDPic, HelpPic, SchemaPic" />
     </Bitmaps>
   </Commands>
 
@@ -164,6 +174,7 @@
       <IDSymbol name="cmdidVSTMCHelpCommand" value="4194" />
       <IDSymbol name="cmdidMyDropDownComboGetList" value="4195" />
       <IDSymbol name="cmdidBentleyHelpCommand" value="4225" />
+      <IDSymbol name="cmdidAddKeyinTreeSchemaCommand" value="4226" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{bc6230d7-3069-45c9-abeb-9e9696245513}">
@@ -177,6 +188,7 @@
       <IDSymbol name="MSCEPic" value="8" />
       <IDSymbol name="ORDPic" value="9" />
       <IDSymbol name="HelpPic" value="10" />
+      <IDSymbol name="SchemaPic" value="11" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

@@ -23,14 +23,14 @@ namespace VSTMC
         public void SearchBentleyForums()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            if (dte.ActiveDocument != null)
+            if (Dte.ActiveDocument != null)
             {
-                var selection = (TextSelection)dte.ActiveDocument.Selection;
+                var selection = (TextSelection)Dte.ActiveDocument.Selection;
                 if (selection != null)
                     if (!string.IsNullOrEmpty(selection.Text))
                     {
                         ItemOperations itemOp;
-                        itemOp = dte.ItemOperations;
+                        itemOp = Dte.ItemOperations;
                         itemOp.Navigate("https://communities.bentley.com/search?q=" + selection.Text + "#serpsort=date%20desc&serpgroup=444");
                     }
             }
@@ -44,7 +44,7 @@ namespace VSTMC
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             this.package = package;
-            string projectLocation = dte.get_Properties("Environment", "ProjectsAndSolution").Item("ProjectsLocation").Value.ToString();
+            string projectLocation = Dte.get_Properties("Environment", "ProjectsAndSolution").Item("ProjectsLocation").Value.ToString();
             string file = GetFilesDialog(
                         "Select CONNECT Edition Make File",
                         "Make File (*.mke)|*.mke",
@@ -59,7 +59,7 @@ namespace VSTMC
                 string solutionFile = null;
                 string solutionFileName = null;
                 string solutionPath = null;
-                if (string.IsNullOrEmpty(dte.Solution.FullName))
+                if (string.IsNullOrEmpty(Dte.Solution.FullName))
                 {
                     solutionFile = GetFilesDialog(
                         "Select Solution or Create New Solution to add Project",
@@ -74,14 +74,14 @@ namespace VSTMC
                             FileInfo solutionFileInfo = new FileInfo(solutionFile);
                             solutionFileName = solutionFileInfo.Name.Replace(".sln", "");
                             solutionPath = solutionFileInfo.DirectoryName + "\\" + solutionFileName;
-                            dte.Solution.Open(solutionFile);
+                            Dte.Solution.Open(solutionFile);
                         }
                         catch (Exception)
                         {
                             FileInfo solutionFileInfo = new FileInfo(solutionFile);
                             solutionFileName = solutionFileInfo.Name.Replace(".sln", "");
                             solutionPath = solutionFileInfo.DirectoryName + "\\" + solutionFileName;
-                            dte.Solution.Create(solutionPath, solutionFileInfo.Name);
+                            Dte.Solution.Create(solutionPath, solutionFileInfo.Name);
                         }
                     }
                     else
@@ -91,10 +91,10 @@ namespace VSTMC
                 }
                 else
                 {
-                    FileInfo solutionFileInfo = new FileInfo(dte.Solution.FullName);
+                    FileInfo solutionFileInfo = new FileInfo(Dte.Solution.FullName);
                     solutionFileName = solutionFileInfo.Name.Replace(".sln", "");
                     solutionPath = solutionFileInfo.DirectoryName;
-                    solutionFile = dte.Solution.FullName;
+                    solutionFile = Dte.Solution.FullName;
                 }
 
                 if (!isCanceled)
@@ -102,7 +102,7 @@ namespace VSTMC
                     if (!Directory.Exists(solutionPath))
                     {
                         Directory.CreateDirectory(solutionPath);
-                        dte.Solution.SaveAs(solutionPath + "\\" + solutionFileName + ".sln");
+                        Dte.Solution.SaveAs(solutionPath + "\\" + solutionFileName + ".sln");
                     }
 
                     if (null != solutionFile)
@@ -147,7 +147,7 @@ namespace VSTMC
                             result = result
                                 .Replace("$safeprojectname$", pathSplit[pathSplit.GetUpperBound(0)])
                                 .Replace("$guid1$", "{" + Guid.NewGuid().ToString() + "}")
-                                .Replace("$platformtoolset$", PlatFormToolSet(dte.Version));
+                                .Replace("$platformtoolset$", PlatFormToolSet(Dte.Version));
 
                             resultFilters = resultFilters
                                .Replace("$guid1$", "{" + Guid.NewGuid().ToString() + "}")
@@ -212,7 +212,7 @@ namespace VSTMC
                             File.WriteAllText(projectFile, result);
                             File.WriteAllText(filterFile, resultFilters);
                             UpdateStatusBar(originalFileInfo.Name.Replace(originalFileInfo.Extension, "") + " successfully upgraded to Visual Studio Tools format.");
-                            dte.Solution.AddFromFile(projectFile);
+                            Dte.Solution.AddFromFile(projectFile);
                         }
                         else
                             UpdateStatusBar(originalFileInfo.Name.Replace(originalFileInfo.Extension, "") + " project creation failed: Project already exist in Visual Studio projects folder.");
@@ -304,20 +304,20 @@ namespace VSTMC
         //
         // Returns:
         //     Returns the active document project.
-        public Project ActiveDocumentProject { get { ThreadHelper.ThrowIfNotOnUIThread(); return dte.ActiveDocument.ProjectItem.ContainingProject; } }
+        public static Project ActiveDocumentProject { get { ThreadHelper.ThrowIfNotOnUIThread(); return Dte.ActiveDocument.ProjectItem.ContainingProject; } }
 
         // Summary:
         //     Gets the active project.
         //
         // Returns:
         //     Returns the active project.
-        public Project ActiveProject { get { ThreadHelper.ThrowIfNotOnUIThread(); return (Project)ActiveSolutionProjects.GetValue(0); } }
+        public static Project ActiveProject { get { ThreadHelper.ThrowIfNotOnUIThread(); return (Project)ActiveSolutionProjects.GetValue(0); } }
 
         /// <summary>
         /// (Read-only) Determine if the active document is in a Bentley project.
         /// Returns true if the active document is in a Bentley project, otherwise returns false.
         /// </summary>
-        public bool IsActiveDocumentBentleyProject
+        public static bool IsActiveDocumentBentleyProject
         {
             get
             {
@@ -341,7 +341,7 @@ namespace VSTMC
         /// (Read-only) Determine if project is a Bentley project.
         /// Returns true if project is a Bentley project, otherwise returns false.
         /// </summary>
-        public bool IsCONNECTProject
+        public static bool IsCONNECTProject
         {
             get
             {
@@ -358,6 +358,41 @@ namespace VSTMC
                     return false;
                 }
                 return true;
+            }
+        }
+
+        /// <summary>
+        /// (Read-only) Determine if project is the Commands.xml is open and the active document.
+        /// Returns true if Commands.xml is open and the active document, otherwise returns false.
+        /// </summary>
+        public static bool IsCommandTableActiveDocument
+        {
+            get
+            {
+                ThreadHelper.ThrowIfNotOnUIThread();
+                if (Dte.ActiveDocument.Name != "Commands.xml")
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// (Read-only) Determine if there is selected text in the active document.
+        /// Returns true if there is selected text in the active document, otherwise returns false.
+        /// </summary>
+        public static bool IsTextSelected
+        {
+            get
+            {
+                ThreadHelper.ThrowIfNotOnUIThread();
+                var selection = (TextSelection)Dte.ActiveDocument.Selection;
+                if (selection != null)
+                {
+                    return !string.IsNullOrEmpty(selection.Text);
+                }
+                return false;
             }
         }
 
@@ -407,15 +442,23 @@ namespace VSTMC
                 Verb = "open"
             });
         }
-       
+
         /// <summary>
-        /// Get extension path
+        /// Get Visual Studio path.
         /// </summary>
-        public string GetExtensionAssemblyPath
+        public static string VisualStudioPath
+        {
+            get { ThreadHelper.ThrowIfNotOnUIThread(); return Path.GetFullPath(Path.Combine(Utilities.Dte.FullName, @"..\..\..\")); }
+        }
+
+        /// <summary>
+        /// Get extension Assembly path.
+        /// </summary>
+        public static string GetExtensionAssemblyPath
         {
             get
             {
-                return System.IO.Path.GetDirectoryName(new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
+                return Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
             }
         }
 
@@ -426,7 +469,7 @@ namespace VSTMC
         /// <summary>
         /// Get or set Visual Studio environment DTE (EnvDTE.DTE).
         /// </summary>
-        private DTE dte
+        public static DTE Dte
         {
             get { ThreadHelper.ThrowIfNotOnUIThread(); return Package.GetGlobalService(typeof(SDTE)) as DTE; }
         }
@@ -434,7 +477,12 @@ namespace VSTMC
         /// <summary>
         /// Get ActiveSolutionProjects. Read only.
         /// </summary>
-        private Array ActiveSolutionProjects { get { ThreadHelper.ThrowIfNotOnUIThread(); return (Array)dte.ActiveSolutionProjects; } }
+        private static Array ActiveSolutionProjects { get { ThreadHelper.ThrowIfNotOnUIThread(); return (Array)Dte.ActiveSolutionProjects; } }
+
+        /// <summary>
+        /// Get ActiveDocument. Read only.
+        /// </summary>
+        private static Document ActiveDocument { get { ThreadHelper.ThrowIfNotOnUIThread(); return Dte.ActiveDocument; } }
 
         /// <summary>
         /// Set or get initial directory

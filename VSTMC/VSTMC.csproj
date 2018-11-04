@@ -72,6 +72,7 @@
     </CopyVsixExtensionLocation>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Tools\AddKeyinTreeSchemaCommand.cs" />
     <Compile Include="BentleyDataCollector\BentleyDataCollector.cs" />
     <Compile Include="Tools\BentleyHelpCommand.cs" />
     <Compile Include="Tools\NativeImportCommand.cs" />
@@ -114,7 +115,6 @@
     <Content Include="include\tstring_typedef.h">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Resources\BentleyHelpCommand.png" />
     <Content Include="Resources\eula.rtf">
       <IncludeInVSIX>true</IncludeInVSIX>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -137,6 +137,10 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <None Include="Key.snk" />
+    <Content Include="KeyinTree\KeyinTree.xsd">
+      <SubType>Designer</SubType>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="Resources\KeyinTree.xsd">
       <SubType>Designer</SubType>
     </None>

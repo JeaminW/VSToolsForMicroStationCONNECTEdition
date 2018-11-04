@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio;
+﻿using EnvDTE;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
@@ -96,6 +97,7 @@ namespace VSTMC
             await SearchBentleyForumsCommand.InitializeAsync(this);
             await VSTMCHelpCommand.InitializeAsync(this);
             await BentleyHelpCommand.InitializeAsync(this);
+            await AddKeyinTreeSchemaCommand.InitializeAsync(this);
         }
 
         private static void LoadPackage()
@@ -150,7 +152,7 @@ namespace VSTMC
                         msceInclude += ";" + SDKPath + "Objects";
                     }
 
-                    msceInclude += ";" + GetAssemblyPath + "\\include";
+                    msceInclude += ";" + Utilities.GetExtensionAssemblyPath + "\\include";
 
                     Environment.SetEnvironmentVariable("MSCE_IncludePath", msceInclude, EnvironmentVariableTarget.Process);
 
@@ -223,14 +225,6 @@ namespace VSTMC
 
                     #endregion
                 }
-            }
-        }
-
-        public string GetAssemblyPath
-        {
-            get
-            {
-                return Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
             }
         }
 

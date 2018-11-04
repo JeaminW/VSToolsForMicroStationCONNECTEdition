@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.Design;
 using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
@@ -37,9 +39,9 @@ namespace VSTMC
         /// <param name="commandService">Command service to add command to, not null.</param>
         private NativeImportCommand(AsyncPackage package, OleMenuCommandService commandService)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
-
             var menuCommandID = new CommandID(CommandSet, CommandId);
             var menuItem = new MenuCommand(this.Execute, menuCommandID);
             commandService.AddCommand(menuItem);

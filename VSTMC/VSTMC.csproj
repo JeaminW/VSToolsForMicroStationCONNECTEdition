@@ -73,6 +73,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BentleyDataCollector\BentleyDataCollector.cs" />
+    <Compile Include="Tools\BentleyHelpCommand.cs" />
     <Compile Include="Tools\NativeImportCommand.cs" />
     <Compile Include="Tools\OpenFolderCommand.cs" />
     <Compile Include="Tools\OpenMdlAppsFolderCommand.cs" />
@@ -113,6 +114,7 @@
     <Content Include="include\tstring_typedef.h">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="Resources\BentleyHelpCommand.png" />
     <Content Include="Resources\eula.rtf">
       <IncludeInVSIX>true</IncludeInVSIX>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -120,7 +122,6 @@
     <Content Include="Resources\Browse.png" />
     <Content Include="Resources\LockedPadlock.png" />
     <Content Include="Resources\OpenedPadlock.png" />
-    <Content Include="Resources\OpenSDKFolder.png" />
     <Content Include="Resources\OptionsPageImage.png" />
     <Content Include="Resources\Logo.ico">
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -132,7 +133,7 @@
     <None Include="ExampleBatchFiles\AECOsimBuild.bat" />
     <None Include="ExampleBatchFiles\MSCEBuild.bat" />
     <None Include="ExampleBatchFiles\ORDBuild.bat" />
-    <Content Include="Help\Visual Studio Tools for MicroStation CONNECT Edition.chm">
+    <Content Include="Help\VSToolsForMicroStationCONNECTEdition.chm">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <None Include="Key.snk" />

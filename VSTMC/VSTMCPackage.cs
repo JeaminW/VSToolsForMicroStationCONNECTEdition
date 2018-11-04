@@ -95,6 +95,7 @@ namespace VSTMC
             await OpenSDKFolderCommand.InitializeAsync(this);
             await SearchBentleyForumsCommand.InitializeAsync(this);
             await VSTMCHelpCommand.InitializeAsync(this);
+            await BentleyHelpCommand.InitializeAsync(this);
         }
 
         private static void LoadPackage()

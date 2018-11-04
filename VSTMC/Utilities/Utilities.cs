@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using VSTMC.Properties;
 
 namespace VSTMC
 {
@@ -141,8 +142,8 @@ namespace VSTMC
 
                             DirectoryInfo directoryInfo = new DirectoryInfo(destinationDir);
 
-                            string result = Properties.Resources.CONNECTvcproj;
-                            string resultFilters = Properties.Resources.CONNECTFilters;
+                            string result = Resources.CONNECTvcproj;
+                            string resultFilters = Resources.CONNECTFilters;
                             result = result
                                 .Replace("$safeprojectname$", pathSplit[pathSplit.GetUpperBound(0)])
                                 .Replace("$guid1$", "{" + Guid.NewGuid().ToString() + "}")
@@ -406,6 +407,17 @@ namespace VSTMC
                 Verb = "open"
             });
         }
+       
+        /// <summary>
+        /// Get extension path
+        /// </summary>
+        public string GetExtensionAssemblyPath
+        {
+            get
+            {
+                return System.IO.Path.GetDirectoryName(new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
+            }
+        }
 
         #endregion
 
@@ -448,7 +460,7 @@ namespace VSTMC
         /// <summary>
         /// Gets the service provider from the owner package.
         /// </summary>
-        private System.IServiceProvider ServiceProvider
+        private IServiceProvider ServiceProvider
         {
             get
             {

@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
 
 namespace VSTMC
@@ -18,6 +22,7 @@ namespace VSTMC
         /// Command ID.
         /// </summary>
         public const int CommandId = 4194;
+
 
         /// <summary>
         /// Command menu group (command set GUID).
@@ -91,11 +96,8 @@ namespace VSTMC
             ThreadHelper.ThrowIfNotOnUIThread();
             try
             {
-                string codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-                UriBuilder uri = new UriBuilder(codeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
-                string helpFilePath = string.Format("file://{0}\\Help\\Visual Studio Tools for MicroStation CONNECT Edition.chm", System.IO.Path.GetDirectoryName(path));
-                System.Windows.Forms.Help.ShowHelp(null, helpFilePath);
+                Utilities utilities = new Utilities();
+                System.Windows.Forms.Help.ShowHelp(new System.Windows.Forms.Button(), utilities.GetExtensionAssemblyPath + "\\Help\\VSToolsForMicroStationCONNECTEdition.chm");
             }
             catch (Exception)
             {

@@ -96,7 +96,7 @@ namespace VSTMC
             ThreadHelper.ThrowIfNotOnUIThread();
             try
             {
-                System.Windows.Forms.Help.ShowHelp(new System.Windows.Forms.Button(), Utilities.GetExtensionAssemblyPath + "\\Help\\VSToolsForMicroStationCONNECTEdition.chm");
+                System.Windows.Forms.Help.ShowHelp(new System.Windows.Forms.TextBox(), Utilities.GetExtensionAssemblyPath + "\\Help\\VSToolsForMicroStationCONNECTEdition.chm");
             }
             catch (Exception)
             {

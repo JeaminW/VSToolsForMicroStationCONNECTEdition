@@ -205,7 +205,10 @@ namespace VSTMC
                     {
                         currentDropDownComboChoice = dropDownComboChoices[indexInput];
                         string SDKPath = Environment.GetEnvironmentVariable("MSCESDKPath", EnvironmentVariableTarget.Process);
-                        System.Windows.Forms.Help.ShowHelp(new System.Windows.Forms.Button(), SDKPath + "\\Doc\\" + currentDropDownComboChoice + ".chm");
+                        if (File.Exists(SDKPath + "\\Doc\\" + currentDropDownComboChoice + ".chm"))
+                            System.Windows.Forms.Help.ShowHelp(new System.Windows.Forms.Button(), SDKPath + "\\Doc\\" + currentDropDownComboChoice + ".chm");
+                        else if (File.Exists(SDKPath + "\\Documentation\\" + currentDropDownComboChoice + ".chm"))
+                            System.Windows.Forms.Help.ShowHelp(new System.Windows.Forms.Button(), SDKPath + "\\Documentation\\" + currentDropDownComboChoice + ".chm");
                     }
                     else
                     {

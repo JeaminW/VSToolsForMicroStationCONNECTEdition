@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetCantsList</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting Cants string name List.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetCantsList</Shortcut>
+    </Header>
+    <Snippet>
+     <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>	
+      <Code Language="vb" Delimiter="$"><![CDATA[    ''' <summary>Get Cants string name list.</summary>
+    Public ReadOnly Property GetCants() As List(Of String)
+        Get
+            Dim cantNames As List(Of String) = New List(Of String)
+
+            'Checking for Active SDK connection and Cants nullification
+            If SDKCon.GetActive() Is Nothing Or SDKCon.GetActive().Cants Is Nothing Then
+                cantNames.Add("None")
+            Else
+                For Each cant As SDK.Cant In SDKCon.GetActive().Cants
+                    If Not String.IsNullOrEmpty(cant.Name) Then
+                        cantNames.Add(cant.Name)
+                    End If
+                Next
+            End If
+            Return cantNames
+        End Get
+    End Property]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

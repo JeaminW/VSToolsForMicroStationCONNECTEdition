@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetLinearEntities3dNames</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting LinearEntities3d string name list.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetLinearEntities3dNames</Shortcut>
+    </Header>
+    <Snippet>
+     <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>	
+      <Code Language="vb" Delimiter="$"><![CDATA[   ''' <summary>Get LinearEntities3d string name list.</summary>
+    Private ReadOnly Property GetLinearEntities3d As List(Of String)
+        Get
+            Dim LinearEntity3dNames As List(Of String) = New List(Of String)()
+
+            'Checking for Active SDK connection and LinearEntities3d nullification
+            If SDKCon.GetActive() Is Nothing Or SDKCon.GetActive().LinearEntities3d Is Nothing Then
+                LinearEntity3dNames.Add("None")
+            Else
+                For Each linearEntity3d As SDK.LinearEntity3d In SDKCon.GetActive().LinearEntities3d
+                    If Not String.IsNullOrEmpty(linearEntity3d.Name) Then LinearEntity3dNames.Add(linearEntity3d.Name)
+                Next
+            End If
+
+            LinearEntity3dNames.Sort()
+            Return LinearEntity3dNames
+        End Get
+    End Property]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -29,7 +29,7 @@ namespace VSTMC
     /// </para>
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [InstalledProductRegistration("#110", "#112", "5.0.1.1", IconResourceID = 400)] // Info on this package for Help/About
+    [InstalledProductRegistration("#110", "#112", "5.0.1.2", IconResourceID = 400)] // Info on this package for Help/About
     [Guid(PackageGuids.guidPackageString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideOptionPage(typeof(OptionsPage), "Bentley", "MicroStation CONNECT", 100, 102, true, new string[] { "Bentley Developer Network - Bentley CONNECT Edition" })]

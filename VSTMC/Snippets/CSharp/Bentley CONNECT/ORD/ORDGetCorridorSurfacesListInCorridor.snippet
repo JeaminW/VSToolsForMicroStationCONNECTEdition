@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetCorridorSurfacesListInCorridor</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting CorridorSurfaces list in Corridor.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetCorridorSurfacesListInCorridor</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>
+      <Code Language="csharp" Delimiter="$"><![CDATA[/// <summary>
+        /// Get CorridorSurfaces list in Corridor.
+        /// </summary>
+        /// <param name="corridor"></param>
+        /// <returns></returns>
+        private List<SDK.CorridorSurface> GetCorridoreSurfacesInCorridor(SDK.Corridor corridor)
+        {
+            if (0 == corridor.CorridorSurfaces.Count())
+                return null;
+
+            List<SDK.CorridorSurface> corridorSurfaces = new List<SDK.CorridorSurface>();
+            foreach (SDK.CorridorSurface corridorSurface in corridor.CorridorSurfaces)
+            {
+                corridorSurfaces.Add(corridorSurface);
+            }
+            return corridorSurfaces;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

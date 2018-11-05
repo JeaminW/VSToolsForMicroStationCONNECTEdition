@@ -361,6 +361,108 @@
     <Content Include="Snippets\Visual Basic\Bentley CONNECT\MicroStation\Settings\SetLineWeightInt.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetAlignmentByName.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetAlignmentsList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetAnnotationDefinitionsList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetAnnotationGroupsList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetCantsList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetCorridorsList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetCorridorSurfacesList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetCorridorSurfacesListInCorridor.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetFeatureDefinitions.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetLinearEntities3dNames.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetPointEntities2dNames.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetProfileListByAlignmentName.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetProfilesListInAlignment.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetScalableMeshSurfacesList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetSDKCon.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetSuperNames.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\CSharp\Bentley CONNECT\ORD\ORDGetTerrainSurfacesList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetAlignmentByName.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetAlignmentsList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetAnnotationDefinitionsList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetAnnotationGroupsList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetCantsList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetCorridorsList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetCorridorSurfacesList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetCorridorSurfacesListInCorridor.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetFeatureDefinitions.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetLinearEntities3dNames.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetPointEntities2dNames.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetProfileListByAlignmentName.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetProfilesListInAlignment.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetScalableMeshSurfacesList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetSDKCon.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetSuperNames.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Snippets\Visual Basic\Bentley CONNECT\ORD\ORDGetTerrainSurfacesList.snippet">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>

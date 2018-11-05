@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VSTMC.4a7873f1-a18c-43bd-ad5e-cd67ed280ac1" Version="5.0.1.1" Language="en-US" Publisher="innovoCAD" />
+        <Identity Id="VSTMC.4a7873f1-a18c-43bd-ad5e-cd67ed280ac1" Version="5.0.1.2" Language="en-US" Publisher="innovoCAD" />
         <DisplayName>VS Tools for MicroStation CONNECT Edition</DisplayName>
         <Description xml:space="preserve">Visual Studio Tools and Templates for MicroStation CONNECT Edition, AECOsim Building Designer CONNECT Edition, OpenRoads Designer CONNECT Edition and more...</Description>
         <MoreInfo>https://marketplace.visualstudio.com/items?itemName=vs-publisher-542131.VSToolsForMicroStationCONNECTEdition</MoreInfo>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetSDKCon</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting the OpenRoads Designer SDK connection.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetSDKConnection</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Ustation</Assembly>
+        </Reference>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+        <Import>
+          <Namespace>BM = Bentley.MstnPlatformNET</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>
+      <Code Language="csharp" Delimiter="$"><![CDATA[///<summary>Get the OpenRoads Designer SDK connection.</summary>
+public SDK.ConsensusConnection SDKCon
+{
+    get { return SDK.ConsensusConnection.Create(BM.Session.Instance.GetActiveDgnModelRef());}
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

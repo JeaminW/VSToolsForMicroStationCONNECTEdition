@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetCorridorSurfaceList</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting CorridorSurface string name list.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetCorridorSurfaceList</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>
+      <Code Language="csharp" Delimiter="$"><![CDATA[/// <summary>Get CorridorSurfaces string name list.</summary>
+private List<string> GetCorridorSurfaces
+{
+    get
+    {
+        List<string> corridorSurfacesNames = new List<string>();
+
+        //Checking for Active SDK connection and CorridorSurfaces nullification
+        if (SDKCon.GetActive() == null || SDKCon.GetActive().CorridorSurfaces == null)
+            corridorSurfacesNames.Add("None");
+        else
+        foreach (SDK.CorridorSurface corridorSurface in SDKCon.GetActive().CorridorSurfaces)
+        {
+            corridorSurfacesNames.Add(corridorSurface.Name);
+        }
+
+        return corridorSurfacesNames;
+    }
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

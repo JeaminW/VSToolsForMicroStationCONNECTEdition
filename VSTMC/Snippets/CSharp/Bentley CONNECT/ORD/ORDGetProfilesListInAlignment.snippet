@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>GetProfilesListInAlignment</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting Profile string name list in Alignment.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetProfilesListInAlignment</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>		
+      <Code Language="csharp" Delimiter="$"><![CDATA[/// <summary>
+        /// Get Profiles string name list in Alignment.
+        /// </summary>
+        /// <param name="alignment"></param>
+        /// <returns></returns>
+        private List<SDK.Profile> GetProfiles(SDK.Alignment alignment)
+        {
+            if (0 == alignment.Profiles.Count())
+                return null;
+
+            List<SDK.Profile> profiles = new List<SDK.Profile>();
+            foreach (SDK.Profile profile in alignment.Profiles)
+            {
+                profiles.Add(profile);
+            }
+
+            return profiles;
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

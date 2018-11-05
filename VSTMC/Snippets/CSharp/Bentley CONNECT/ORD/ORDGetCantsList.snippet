@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetCantsList</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting Cants string name List.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetCantsList</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>	
+      <Code Language="csharp" Delimiter="$"><![CDATA[///<summary>Get Cants string name list.</summary>
+        private List<string> GetCants
+        {
+            get
+            {
+                List<string> CantNames = new List<string>();
+
+                //Checking for Active SDK connection and Cants nullification
+                if (SDKCon.GetActive() == null || SDKCon.GetActive().Cants == null)
+                    CantNames.Add("None");
+                else
+                    foreach (SDK.Cant cant in SDKCon.GetActive().Cants)
+                    {
+                        if (!string.IsNullOrEmpty(cant.Name))
+                            CantNames.Add(cant.Name);
+                    }
+
+                CantNames.Sort();
+                return CantNames;
+            }
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

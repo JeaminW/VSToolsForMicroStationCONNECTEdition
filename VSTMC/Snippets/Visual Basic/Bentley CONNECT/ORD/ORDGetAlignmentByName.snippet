@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetAlignmentByName</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting Alignment by Alignment name.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetAlignmentByName</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>alignmentName</ID>
+          <ToolTip>Alignment Name</ToolTip>
+          <Default>alignmentName</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="vb" Delimiter="$"><![CDATA[Dim alignment As SDK.Alignment = SDKCon.GetActive().GetAlignmentByName("$alignmentName$")]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

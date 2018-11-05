@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetProfilesListInAlignment</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting Profile string name list in Alignment.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetProfilesListInAlignment</Shortcut>
+    </Header>
+    <Snippet>
+     <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>	
+      <Code Language="vb" Delimiter="$"><![CDATA[    ''' <summary>
+    ''' Get Profiles string name list in Alignment.
+    ''' </summary>
+    ''' <param name="alignment"></param>
+    ''' <returns></returns>
+    Private Function GetProfiles(ByVal alignment As SDK.Alignment) As List(Of SDK.Profile)
+        If 0 = alignment.Profiles.Count() Then Return Nothing
+        Dim profiles As List(Of SDK.Profile) = New List(Of SDK.Profile)()
+        For Each profile As SDK.Profile In alignment.Profiles
+            profiles.Add(profile)
+        Next
+
+        Return profiles
+    End Function]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

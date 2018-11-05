@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetAnnotationDefinitionsList</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting AnnotationDefinitions string name list.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetAnnotationDefinitionsList</Shortcut>
+    </Header>
+    <Snippet>
+     <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>	
+      <Code Language="vb" Delimiter="$"><![CDATA[    ''' <summary>Get AnnotationDefinitions string name list.</summary>
+    Public ReadOnly Property GetAnnotationDefinitions() As List(Of String)
+        Get
+            Dim annoNames As List(Of String) = New List(Of String)
+
+            'Checking for Active SDK connection and AnnotationDefinitions nullification
+            If SDKCon.GetActive() Is Nothing Or SDKCon.GetActive().AnnotationDefinitions Is Nothing Then
+                annoNames.Add("None")
+            Else
+                For Each annotationDefinition As SDK.AnnotationDefinition In SDKCon.GetActive().AnnotationDefinitions
+                    If Not String.IsNullOrEmpty(annotationDefinition.AnnotationSchemaName) Then
+                        annoNames.Add(annotationDefinition.AnnotationSchemaName)
+                    End If
+                Next
+            End If
+            Return annoNames
+        End Get
+    End Property]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

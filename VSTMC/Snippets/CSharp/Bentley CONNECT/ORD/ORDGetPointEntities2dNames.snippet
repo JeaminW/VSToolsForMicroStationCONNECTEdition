@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetPointEntities2dNames</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting PointEntities2d string name list.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetPointEntities2dNames</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>	
+      <Code Language="csharp" Delimiter="$"><![CDATA[///<summary>Get PointEntities2d string name list.</summary>
+        private List<string> GetPointEntities2d
+        {
+            get
+            {
+                List<string> pointEntity2dNames = new List<string>();
+
+                //Checking for Active SDK connection and PointEntities2d nullification
+                if (SDKCon.GetActive() == null || SDKCon.GetActive().PointEntities2d == null)
+                    pointEntity2dNames.Add("None");
+                else
+                    foreach (SDK.PointEntity2d pointEntity2d in SDKCon.GetActive().PointEntities2d)
+                    {
+                        if (!string.IsNullOrEmpty(pointEntity2d.Name))
+                            pointEntity2dNames.Add(pointEntity2d.Name);
+                    }
+
+                pointEntity2dNames.Sort();
+                return pointEntity2dNames;
+            }
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

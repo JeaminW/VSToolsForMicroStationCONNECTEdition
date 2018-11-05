@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetAnnotationGroupsList</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting AnnotationGroups string name List.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetAnnotationGroupsList</Shortcut>
+    </Header>
+    <Snippet>
+     <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>	
+      <Code Language="vb" Delimiter="$"><![CDATA[    ''' <summary>Get AnnotationGroups string name list.</summary>
+    Public ReadOnly Property GetAnnotationGroups() As List(Of String)
+        Get
+            Dim annoGrpNames As List(Of String) = New List(Of String)
+
+            'Checking for Active SDK connection and AnnotationGroups nullification
+            If SDKCon.GetActive() Is Nothing Or SDKCon.GetActive().AnnotationGroups Is Nothing Then
+                annoGrpNames.Add("None")
+            Else
+                For Each annotationGroup As SDK.AnnotationGroup In SDKCon.GetActive().AnnotationGroups
+                    If Not String.IsNullOrEmpty(annotationGroup.Name) Then
+                        annoGrpNames.Add(annotationGroup.Name)
+                    End If
+                Next
+            End If
+            Return annoGrpNames
+        End Get
+    End Property]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

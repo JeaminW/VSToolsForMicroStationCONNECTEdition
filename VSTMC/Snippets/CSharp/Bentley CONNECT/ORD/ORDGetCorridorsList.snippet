@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ORDGetCorridorsList</Title>
+      <Author>innovoCAD</Author>
+      <Description>Code snippet for getting Corridors string name list.</Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>ORDGetCorridorsList</Shortcut>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>Bentley.CifNET.GeometryModel.SDK.4.0</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+	  <Import>
+          <Namespace>System.Collections.Generic</Namespace>
+        </Import>
+        <Import>
+          <Namespace>SDK = Bentley.CifNET.GeometryModel.SDK</Namespace>
+        </Import>
+      </Imports>
+      <Code Language="csharp" Delimiter="$"><![CDATA[/// <summary>Get Corridors string name list.</summary>
+private List<string> GetCorridors
+{
+    get
+        {
+            List<string> corridorsNames = new List<string>();
+
+            //Checking for Active SDK connection and Corridors nullification
+            if (SDKCon.GetActive() == null || SDKCon.GetActive().Corridors == null)
+                corridorsNames.Add("None");
+            else
+            foreach (SDK.Corridor corridor in SDKCon.GetActive().Corridors)
+            {
+                corridorsNames.Add(corridor.Name);
+            }
+
+            return corridorsNames;
+        }
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
